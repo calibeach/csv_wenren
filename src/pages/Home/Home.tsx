@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useReducer } from "react";
 
 import {
   StyledHomeContainer,
@@ -7,37 +7,29 @@ import {
   StyledWinningChengyuBoard,
   StyledPlayingArea,
 } from "./StyledHome";
-import { ResultData } from "../../types/types";
 import { EunuchTile } from "../../components/Tiles/EunuchTile/EunuchTile";
 import { EmperorTile } from "../../components/Tiles/EmperorTile/EmperorTile";
 import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
 import ChosenTilesArea from "../../components/PlayingArea/PlayingArea";
-
 import { findValidCombination } from "../../wordSelection/wordSelection";
+import { reducer, initialState } from "../../reducer/reducer";
 
 const Home: React.FC = () => {
-  console.log("Rendering Home");
-  const [data, setData] = useState<ResultData | null>(null);
-  const [winningChengyu, setWinningChengyu] = useState<string[]>([]);
-  const [gameTiles, setGameTiles] = useState<string[]>([]);
-  const [chengyuAnswers, setChengyuAnswers] = useState<string[]>([]);
-  const [selectedTiles, setSelectedTiles] = useState<string[]>([]);
-  const [masterTiles, setMasterTiles] = useState<string[]>([]);
-  const [masterEmperorCharacter, setMasterEmperorCharacter] =
-    useState<string>("");
-  const [emperorCharacter, setEmperorCharacter] = useState<string | null>(null);
-  const [isEmperorAnimationComplete, setIsEmperorAnimationComplete] =
-    useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {
+    data,
+    winningChengyu,
+    gameTiles,
+    chengyuAnswers,
+    selectedTiles,
+    emperorCharacter,
+    isEmperorAnimationComplete,
+    isAnimating,
+  } = state;
 
   const handleEmperorAnimationEnd = () => {
-    setIsEmperorAnimationComplete(true);
+    dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: true });
   };
-
-  const updateEmperorCharacter = useCallback((character: string) => {
-    setMasterEmperorCharacter(character);
-    setEmperorCharacter(character);
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,14 +41,30 @@ const Home: React.FC = () => {
         const hanziDB = await hanziDBResponse.json();
 
         const result = findValidCombination(idioms, hanziDB);
-        setChengyuAnswers(result.resultWords);
+        dispatch({ type: "SET_CHENGYU_ANSWERS", payload: result.resultWords });
         const filteredAllowedCharacters = result.allowedCharacters.filter(
           (char) => char !== result.selectedCharacter
         );
-        setMasterTiles(filteredAllowedCharacters);
-        setGameTiles(filteredAllowedCharacters);
-        updateEmperorCharacter(result.selectedCharacter);
-        setData(result);
+        dispatch({
+          type: "SET_MASTER_TILES",
+          payload: filteredAllowedCharacters,
+        });
+        dispatch({
+          type: "SET_GAME_TILES",
+          payload: filteredAllowedCharacters,
+        });
+        dispatch({
+          type: "SET_MASTER_EMPEROR_CHARACTER",
+          payload: result.selectedCharacter,
+        });
+        dispatch({
+          type: "SET_EMPEROR_CHARACTER",
+          payload: result.selectedCharacter,
+        });
+        dispatch({
+          type: "SET_DATA",
+          payload: result,
+        });
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -66,7 +74,7 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log(chengyuAnswers);
+    console.log("Answers", chengyuAnswers);
   }, [chengyuAnswers]);
 
   const checkWinningChengyu = () => {
@@ -75,47 +83,63 @@ const Home: React.FC = () => {
     }
     const joinedTiles = selectedTiles.join("");
     if (chengyuAnswers.includes(joinedTiles)) {
-      console.log("Setting isAnimating to true");
-      setIsAnimating(true);
+      dispatch({ type: "SET_IS_ANIMATING", payload: true });
       setTimeout(() => {
-        console.log("Setting isAnimating to false");
-        setIsAnimating(false);
+        dispatch({ type: "SET_IS_ANIMATING", payload: false });
       }, 2500);
-      setWinningChengyu([...winningChengyu, joinedTiles]);
-      setChengyuAnswers(
-        chengyuAnswers.filter((chengyu) => chengyu !== joinedTiles)
-      );
+      dispatch({
+        type: "SET_WINNING_CHENGYU",
+        payload: [...state.winningChengyu, joinedTiles],
+      });
+      dispatch({
+        type: "SET_CHENGYU_ANSWERS",
+        payload: state.chengyuAnswers.filter(
+          (chengyu: string) => chengyu !== joinedTiles
+        ),
+      });
       resetTiles();
     }
   };
+
   useEffect(() => {
     checkWinningChengyu();
   }, [selectedTiles, chengyuAnswers]);
 
   const resetTiles = () => {
-    setGameTiles(masterTiles);
-    setEmperorCharacter(masterEmperorCharacter);
-    setSelectedTiles([]);
+    dispatch({ type: "SET_GAME_TILES", payload: state.masterTiles });
+    dispatch({
+      type: "SET_EMPEROR_CHARACTER",
+      payload: state.masterEmperorCharacter,
+    });
+    dispatch({ type: "SET_SELECTED_TILES", payload: [] });
   };
-
-  if (!data) {
-    return <div>Loading...</div>;
-  }
 
   const onEmperorClick = (chengyu: string) => {
-    setSelectedTiles([...selectedTiles, chengyu]);
-    setEmperorCharacter("");
+    dispatch({
+      type: "SET_SELECTED_TILES",
+      payload: [...state.selectedTiles, chengyu],
+    });
+    dispatch({ type: "SET_EMPEROR_CHARACTER", payload: "" });
   };
+
   const onEunuchClick = (eunuchCharacter: string) => {
-    setSelectedTiles([...selectedTiles, eunuchCharacter]);
-    setGameTiles(gameTiles.filter((char) => char !== eunuchCharacter));
+    dispatch({
+      type: "SET_SELECTED_TILES",
+      payload: [...state.selectedTiles, eunuchCharacter],
+    });
+    dispatch({
+      type: "SET_GAME_TILES",
+      payload: state.gameTiles.filter(
+        (char: string) => char !== eunuchCharacter
+      ),
+    });
   };
 
   return (
     <StyledHomeContainer>
       {winningChengyu && (
         <StyledWinningChengyuBoard className={isAnimating ? "fade-in" : ""}>
-          {winningChengyu.map((chengyu, index) => (
+          {winningChengyu.map((chengyu: string, index: number) => (
             <WinningChengyu key={index} winningChengYu={chengyu} />
           ))}
         </StyledWinningChengyuBoard>
@@ -138,7 +162,7 @@ const Home: React.FC = () => {
           <StyledEunuchTiles
             $isEmperorAnimationComplete={isEmperorAnimationComplete}
           >
-            {gameTiles.map((tile, index) => (
+            {gameTiles.map((tile: string, index: number) => (
               <EunuchTile
                 key={index}
                 eunuchCharacter={tile}

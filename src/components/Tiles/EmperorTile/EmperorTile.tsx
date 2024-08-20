@@ -13,6 +13,7 @@ const EmperorTile: React.FC<EmperorTileProps> = ({
   onEmperorClick,
   onAnimationEnd,
 }) => {
+  console.log("EmperorTile", emperorCharacter);
   const characterRef = useRef<HTMLDivElement>(null);
   const writerRef = useRef<HanziWriter | null>(null);
   const writerConfig = useMemo(

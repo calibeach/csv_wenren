@@ -1,14 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
 
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-`;
-
 const fadeIn = keyframes`
   from {
     opacity: 0;
