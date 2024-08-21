@@ -1,28 +1,14 @@
-import styled, { css, keyframes } from "styled-components";
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
+import styled, { css } from "styled-components";
 
 const StyledHomeContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: 100vh;
   width: 100vw;
   font-family: "KaiTi", serif;
-  background-color: #f5f5f5;
   color: #1c1c1c;
-  background-image: url("/src/assets/blank-rectangle-frame-design_53876-115749.jpg");
-  background-size: cover; /* Ensures the image covers the entire background */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
+  position: relative;
 `;
 
 const StyledEmperorTile = styled.div`
@@ -30,6 +16,16 @@ const StyledEmperorTile = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: row;
+`;
+const StyledBackgroundImage = styled.img`
+  width: 36vw;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1000; /* Ensure the image is behind other content */
 `;
 
 interface StyledEunuchTilesProps {
@@ -57,29 +53,57 @@ const StyledSelectedTile = styled.div`
   align-items: center;
   flex-direction: row;
 `;
-
-const StyledWinningChengyuBoard = styled.div`
-  width: 200px; /* Adjust the width as needed */
-  margin-right: 200px;
-  margin-top: 40px;
-  padding: 10px;
-  background-color: transparent; /* Adjust the background color as needed */
-  z-index: 1000; /* Ensure it appears above other elements */
-  margin-left: auto; /* Pushes the element to the right */
-  align-self: flex-start;
-  &.fade-in {
-    animation: ${fadeIn} 2s forwards;
-  }
+const StyledPlayingArea = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  height: 100vh;
+  border: 1px solid green;
+  z-index: 1000;
 `;
 
-const StyledPlayingArea = styled.div`
+const StyledCharacterArea = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 140px;
   height: 100vh;
 `;
+
+const StyledWinningChengyuBoard = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  padding: 20px; /* Add padding if needed */
+  background-color: transparent; /* Customize as needed */
+`;
+// const StyledWinningChengyuBoard = styled.div`
+//   width: 200px; /* Adjust the width as needed */
+//   margin-right: 200px;
+//   margin-top: 40px;
+//   padding: 10px;
+//   background-color: transparent; /* Adjust the background color as needed */
+//   z-index: 1000; /* Ensure it appears above other elements */
+//   margin-left: auto; /* Pushes the element to the right */
+//   align-self: flex-start;
+//   border: 1px solid green;
+//   &.fade-in {
+//     animation: ${fadeIn} 2s forwards;
+//   }
+// `;
+
+// const StyledPlayingArea = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
+//   align-items: center;
+//   flex-direction: column;
+//   padding-bottom: 140px;
+//   height: 100vh;
+// `;
 
 export {
   StyledHomeContainer,
@@ -88,4 +112,6 @@ export {
   StyledSelectedTile,
   StyledWinningChengyuBoard,
   StyledPlayingArea,
+  StyledBackgroundImage,
+  StyledCharacterArea,
 };

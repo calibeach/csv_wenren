@@ -25,10 +25,10 @@ function selectWordsAndCharacters(idioms: any[], hanziDB: any[]) {
     }
   });
 
-  // Find the 7 most common characters excluding the selected character
+  // Find the 8 most common characters excluding the selected character
   const mostCommonCharacters = Object.entries(characterFrequency)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 7)
+    .slice(0, 8)
     .map((entry) => entry[0]);
 
   // Include the selected character in the list of characters

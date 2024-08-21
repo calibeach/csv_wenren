@@ -2,10 +2,9 @@ import React, { useEffect, useReducer } from "react";
 
 import {
   StyledHomeContainer,
-  StyledEmperorTile,
-  StyledEunuchTiles,
   StyledWinningChengyuBoard,
   StyledPlayingArea,
+  StyledBackgroundImage,
 } from "./StyledHome";
 import { EunuchTile } from "../../components/Tiles/EunuchTile/EunuchTile";
 import { EmperorTile } from "../../components/Tiles/EmperorTile/EmperorTile";
@@ -13,6 +12,7 @@ import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
 import ChosenTilesArea from "../../components/PlayingArea/PlayingArea";
 import { reducer, initialState } from "../../reducer/reducer";
 import useFetchData from "../../customHooks/useFetchData";
+import { CharacterArea } from "../../components/CharacterArea/CharacterArea";
 
 const Home: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -27,13 +27,14 @@ const Home: React.FC = () => {
     isAnimating,
   } = state;
   useFetchData(dispatch);
-  
+
   const handleEmperorAnimationEnd = () => {
     dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: true });
   };
 
   useEffect(() => {
     console.log("Answers", chengyuAnswers);
+    console.log("GameTiles", gameTiles);
   }, [chengyuAnswers]);
 
   const checkWinningChengyu = () => {
@@ -96,39 +97,31 @@ const Home: React.FC = () => {
 
   return (
     <StyledHomeContainer>
-      {winningChengyu && (
-        <StyledWinningChengyuBoard className={isAnimating ? "fade-in" : ""}>
-          {winningChengyu.map((chengyu: string, index: number) => (
-            <WinningChengyu key={index} winningChengYu={chengyu} />
-          ))}
-        </StyledWinningChengyuBoard>
-      )}
+      <StyledBackgroundImage
+        src="/src/assets/Chinese Tree.jpg"
+        alt="Chinese Tree"
+      />
       {data && (
         <StyledPlayingArea>
+          <CharacterArea
+            emperorCharacter={emperorCharacter}
+            onEmperorClick={onEmperorClick}
+            handleEmperorAnimationEnd={handleEmperorAnimationEnd}
+            isEmperorAnimationComplete={isEmperorAnimationComplete}
+            gameTiles={gameTiles}
+            onEunuchClick={onEunuchClick}
+          />
           <ChosenTilesArea
             chosenCharacters={selectedTiles}
             className={isAnimating ? "fade-out" : ""}
           />
-          {data && emperorCharacter && (
-            <StyledEmperorTile>
-              <EmperorTile
-                emperorCharacter={emperorCharacter}
-                onEmperorClick={onEmperorClick}
-                onAnimationEnd={handleEmperorAnimationEnd}
-              />
-            </StyledEmperorTile>
+          {winningChengyu && (
+            <StyledWinningChengyuBoard className={isAnimating ? "fade-in" : ""}>
+              {winningChengyu.map((chengyu: string, index: number) => (
+                <WinningChengyu key={index} winningChengYu={chengyu} />
+              ))}
+            </StyledWinningChengyuBoard>
           )}
-          <StyledEunuchTiles
-            $isEmperorAnimationComplete={isEmperorAnimationComplete}
-          >
-            {gameTiles.map((tile: string, index: number) => (
-              <EunuchTile
-                key={index}
-                eunuchCharacter={tile}
-                onEunuchClick={onEunuchClick}
-              />
-            ))}
-          </StyledEunuchTiles>
         </StyledPlayingArea>
       )}
     </StyledHomeContainer>

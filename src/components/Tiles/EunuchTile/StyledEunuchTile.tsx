@@ -2,13 +2,15 @@ import styled from "styled-components";
 
 const StyledEunuch = styled.div`
   width: 100px;
-  height: 150px;
+  height: 100px;
+  padding: 10px;
   background-color: transparent;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  /* border: 1px solid red; */
 
   .text {
     font-size: 40px;

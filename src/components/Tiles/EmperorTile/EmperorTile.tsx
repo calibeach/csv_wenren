@@ -18,8 +18,8 @@ const EmperorTile: React.FC<EmperorTileProps> = ({
   const writerRef = useRef<HanziWriter | null>(null);
   const writerConfig = useMemo(
     () => ({
-      width: 100,
-      height: 100,
+      width: 200,
+      height: 200,
       padding: 5,
       showOutline: false,
       strokeAnimationSpeed: 1,
