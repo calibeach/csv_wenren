@@ -74,36 +74,15 @@ const StyledCharacterArea = styled.div`
 
 const StyledWinningChengyuBoard = styled.div`
   display: flex;
-  justify-content: center;
+  margin-top: 100px;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  width: 35vw;
   padding: 20px; /* Add padding if needed */
   background-color: transparent; /* Customize as needed */
 `;
-// const StyledWinningChengyuBoard = styled.div`
-//   width: 200px; /* Adjust the width as needed */
-//   margin-right: 200px;
-//   margin-top: 40px;
-//   padding: 10px;
-//   background-color: transparent; /* Adjust the background color as needed */
-//   z-index: 1000; /* Ensure it appears above other elements */
-//   margin-left: auto; /* Pushes the element to the right */
-//   align-self: flex-start;
-//   border: 1px solid green;
-//   &.fade-in {
-//     animation: ${fadeIn} 2s forwards;
-//   }
-// `;
-
-// const StyledPlayingArea = styled.div`
-//   display: flex;
-//   justify-content: flex-end;
-//   align-items: center;
-//   flex-direction: column;
-//   padding-bottom: 140px;
-//   height: 100vh;
-// `;
 
 export {
   StyledHomeContainer,

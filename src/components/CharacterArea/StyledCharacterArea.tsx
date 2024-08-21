@@ -32,7 +32,7 @@ const StyledEunuchTiles = styled.div<StyledEunuchTilesProps>`
   align-items: center;
   opacity: 0;
   transition: opacity 2s ease-in-out;
-  transition-delay: 1s;
+  transition-delay: 0.25s;
   margin-bottom: 3rem;
   ${({ $isEmperorAnimationComplete }) =>
     $isEmperorAnimationComplete &&

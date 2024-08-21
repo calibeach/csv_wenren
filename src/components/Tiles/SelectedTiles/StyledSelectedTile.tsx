@@ -13,7 +13,6 @@ const StyledSelectedTile = styled.div`
   color: #1c1c1c;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   font-weight: bold;
-  cursor: pointer;
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
   margin: 0; /* Ensure no unintended margins */
 `;

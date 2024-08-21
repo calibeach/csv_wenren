@@ -6,8 +6,6 @@ import {
   StyledPlayingArea,
   StyledBackgroundImage,
 } from "./StyledHome";
-import { EunuchTile } from "../../components/Tiles/EunuchTile/EunuchTile";
-import { EmperorTile } from "../../components/Tiles/EmperorTile/EmperorTile";
 import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
 import ChosenTilesArea from "../../components/PlayingArea/PlayingArea";
 import { reducer, initialState } from "../../reducer/reducer";
@@ -71,6 +69,7 @@ const Home: React.FC = () => {
       type: "SET_EMPEROR_CHARACTER",
       payload: state.masterEmperorCharacter,
     });
+    console.log("Resetting tiles");
     dispatch({ type: "SET_SELECTED_TILES", payload: [] });
   };
 
@@ -79,7 +78,7 @@ const Home: React.FC = () => {
       type: "SET_SELECTED_TILES",
       payload: [...state.selectedTiles, chengyu],
     });
-    dispatch({ type: "SET_EMPEROR_CHARACTER", payload: "" });
+    dispatch({ type: "SET_EMPEROR_CHARACTER", payload: " " });
   };
 
   const onEunuchClick = (eunuchCharacter: string) => {
@@ -101,7 +100,7 @@ const Home: React.FC = () => {
         src="/src/assets/Chinese Tree.jpg"
         alt="Chinese Tree"
       />
-      {data && (
+      {data && emperorCharacter && (
         <StyledPlayingArea>
           <CharacterArea
             emperorCharacter={emperorCharacter}
