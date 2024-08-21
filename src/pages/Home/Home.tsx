@@ -11,8 +11,8 @@ import { EunuchTile } from "../../components/Tiles/EunuchTile/EunuchTile";
 import { EmperorTile } from "../../components/Tiles/EmperorTile/EmperorTile";
 import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
 import ChosenTilesArea from "../../components/PlayingArea/PlayingArea";
-import { findValidCombination } from "../../wordSelection/wordSelection";
 import { reducer, initialState } from "../../reducer/reducer";
+import useFetchData from "../../customHooks/useFetchData";
 
 const Home: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -26,52 +26,11 @@ const Home: React.FC = () => {
     isEmperorAnimationComplete,
     isAnimating,
   } = state;
-
+  useFetchData(dispatch);
+  
   const handleEmperorAnimationEnd = () => {
     dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: true });
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const idiomsResponse = await fetch("/idiom.json");
-        const hanziDBResponse = await fetch("/hanziDB_top6000.json");
-
-        const idioms = await idiomsResponse.json();
-        const hanziDB = await hanziDBResponse.json();
-
-        const result = findValidCombination(idioms, hanziDB);
-        dispatch({ type: "SET_CHENGYU_ANSWERS", payload: result.resultWords });
-        const filteredAllowedCharacters = result.allowedCharacters.filter(
-          (char) => char !== result.selectedCharacter
-        );
-        dispatch({
-          type: "SET_MASTER_TILES",
-          payload: filteredAllowedCharacters,
-        });
-        dispatch({
-          type: "SET_GAME_TILES",
-          payload: filteredAllowedCharacters,
-        });
-        dispatch({
-          type: "SET_MASTER_EMPEROR_CHARACTER",
-          payload: result.selectedCharacter,
-        });
-        dispatch({
-          type: "SET_EMPEROR_CHARACTER",
-          payload: result.selectedCharacter,
-        });
-        dispatch({
-          type: "SET_DATA",
-          payload: result,
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     console.log("Answers", chengyuAnswers);
@@ -103,7 +62,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     checkWinningChengyu();
-  }, [selectedTiles, chengyuAnswers]);
+  }, [selectedTiles]);
 
   const resetTiles = () => {
     dispatch({ type: "SET_GAME_TILES", payload: state.masterTiles });

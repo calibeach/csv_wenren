@@ -1,7 +1,5 @@
 import { ResultData } from "../types/types"; // Define the State type
 
-
-
 interface State {
   data: ResultData | null; // Replace 'any' with the actual type if known
   winningChengyu: string[];
@@ -13,6 +11,7 @@ interface State {
   emperorCharacter: string | null;
   isEmperorAnimationComplete: boolean;
   isAnimating: boolean;
+  fetchError: string | null;
 }
 
 // Define the Action type
@@ -27,7 +26,8 @@ type Action =
   | { type: "SET_MASTER_EMPEROR_CHARACTER"; payload: string }
   | { type: "SET_EMPEROR_CHARACTER"; payload: string | null }
   | { type: "SET_IS_EMPEROR_ANIMATION_COMPLETE"; payload: boolean }
-  | { type: "SET_IS_ANIMATING"; payload: boolean };
+  | { type: "SET_IS_ANIMATING"; payload: boolean }
+  | { type: "SET_FETCH_ERROR"; payload: string };
 
 // Define the initial state
 const initialState: State = {
@@ -41,6 +41,7 @@ const initialState: State = {
   emperorCharacter: null,
   isEmperorAnimationComplete: false,
   isAnimating: false,
+  fetchError: null,
 };
 
 // Define the reducer function
@@ -70,5 +71,5 @@ export const reducer = (state: State, action: Action): State => {
       return state;
   }
 };
-
+export type { State, Action };
 export { initialState };
