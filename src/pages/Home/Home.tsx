@@ -89,8 +89,8 @@ const Home: React.FC = () => {
     });
     dispatch({
       type: "SET_GAME_TILES",
-      payload: state.gameTiles.filter(
-        (char: string) => char !== eunuchCharacter
+      payload: state.gameTiles.map((char: string) =>
+        char === eunuchCharacter ? "" : char
       ),
     });
   };
