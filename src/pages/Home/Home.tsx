@@ -5,6 +5,7 @@ import {
   StyledWinningChengyuBoard,
   StyledPlayingArea,
   StyledBackgroundImage,
+  StyledImperialSeal,
 } from "./StyledHome";
 import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
 import ChosenTilesArea from "../../components/PlayingArea/PlayingArea";
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
     emperorCharacter,
     isEmperorAnimationComplete,
     isAnimating,
+    isGuessCorrect,
   } = state;
   useFetchData(dispatch);
 
@@ -33,6 +35,10 @@ const Home: React.FC = () => {
   useEffect(() => {
     console.log("Answers", chengyuAnswers);
   }, [chengyuAnswers]);
+
+  useEffect(() => {
+    console.log("isGuessCorrect", isGuessCorrect);
+  }, [isGuessCorrect]);
 
   const checkWinningChengyu = () => {
     if (selectedTiles.length < 4) {
@@ -52,12 +58,24 @@ const Home: React.FC = () => {
         ),
       });
       setTimeout(() => {
+        console.log("Correct Guess");
+        dispatch({
+          type: "SET_IS_GUESS_CORRECT",
+          payload: true,
+        });
+      }, 1000);
+      setTimeout(() => {
+        console.log("Winning Chengyu", joinedTiles);
         resetTiles();
         dispatch({
           type: "SET_WINNING_CHENGYU",
           payload: [...state.winningChengyu, joinedTiles],
         });
-      }, 4000);
+      }, 5000);
+    } else {
+      setTimeout(() => {
+        resetTiles();
+      }, 5000);
     }
   };
 
@@ -72,6 +90,7 @@ const Home: React.FC = () => {
       payload: state.masterEmperorCharacter,
     });
     dispatch({ type: "SET_SELECTED_TILES", payload: [] });
+    dispatch({ type: "SET_IS_GUESS_CORRECT", payload: false });
   };
 
   const onEmperorClick = (chengyu: string) => {
@@ -101,6 +120,12 @@ const Home: React.FC = () => {
         src="/src/assets/Chinese Tree.jpg"
         alt="Chinese Tree"
       />
+      {isGuessCorrect && (
+        <StyledImperialSeal
+          src="/src/assets/Imperial_Seal_transparent.png"
+          alt="Imperial Seal"
+        />
+      )}
       {data && emperorCharacter && (
         <StyledPlayingArea>
           <CharacterArea

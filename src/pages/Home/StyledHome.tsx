@@ -1,4 +1,12 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const StyledHomeContainer = styled.div`
   display: flex;
@@ -26,6 +34,18 @@ const StyledBackgroundImage = styled.img`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1000; /* Ensure the image is behind other content */
+`;
+
+const StyledImperialSeal = styled.img`
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  position: absolute;
+  top: 60%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  animation: ${fadeIn} 2s forwards;
 `;
 
 interface StyledEunuchTilesProps {
@@ -93,4 +113,5 @@ export {
   StyledPlayingArea,
   StyledBackgroundImage,
   StyledCharacterArea,
+  StyledImperialSeal,
 };

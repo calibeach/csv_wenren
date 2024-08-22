@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useMemo } from "react";
+import { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import { StyledEmperor } from "./StyledEmperor";
 import HanziWriter from "hanzi-writer";
 
@@ -13,9 +13,10 @@ const EmperorTile: React.FC<EmperorTileProps> = ({
   onEmperorClick,
   onAnimationEnd,
 }) => {
-
   const characterRef = useRef<HTMLDivElement>(null);
   const writerRef = useRef<HanziWriter | null>(null);
+  const [outlineColor, setOutlineColor] = useState("#f4de63");
+
   const writerConfig = useMemo(
     () => ({
       width: 200,
@@ -24,9 +25,10 @@ const EmperorTile: React.FC<EmperorTileProps> = ({
       showOutline: false,
       strokeAnimationSpeed: 1,
       delayBetweenStrokes: 0,
-      showCharacter: false, // Ensure no character is shown initially
+      showCharacter: false,
+      outlineColor: outlineColor,
     }),
-    []
+    [outlineColor]
   );
 
   const handleClick = useCallback(() => {
