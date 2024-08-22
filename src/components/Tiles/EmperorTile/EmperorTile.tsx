@@ -13,7 +13,7 @@ const EmperorTile: React.FC<EmperorTileProps> = ({
   onEmperorClick,
   onAnimationEnd,
 }) => {
-  console.log("EmperorTile", emperorCharacter);
+
   const characterRef = useRef<HTMLDivElement>(null);
   const writerRef = useRef<HanziWriter | null>(null);
   const writerConfig = useMemo(
@@ -45,10 +45,12 @@ const EmperorTile: React.FC<EmperorTileProps> = ({
           writerConfig
         );
       } else {
-        // Clear any existing character to prevent flicker
-        writerRef.current.hideCharacter();
-        // Set the new character
-        writerRef.current.setCharacter(emperorCharacter || "");
+        // Set the new character before hiding the existing one to prevent flicker
+        if (emperorCharacter) {
+          writerRef.current.setCharacter(emperorCharacter);
+        } else {
+          writerRef.current.setCharacter("");
+        }
       }
 
       // Animate the character only when a valid emperorCharacter is present
@@ -58,6 +60,9 @@ const EmperorTile: React.FC<EmperorTileProps> = ({
             onAnimationEnd();
           },
         });
+      } else {
+        // Ensure the animation end callback is called if no character is present
+        onAnimationEnd();
       }
     }
   }, [emperorCharacter, writerConfig]);

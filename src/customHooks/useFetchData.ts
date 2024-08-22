@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Action } from "../reducer/reducer"
+import { Action } from "../reducer/reducer";
 import { findValidCombination } from "../wordSelection/wordSelection";
 
 interface FetchDataResult {
@@ -13,7 +13,7 @@ const useFetchData = (dispatch: React.Dispatch<Action>): void => {
     const fetchData = async () => {
       try {
         const idiomsResponse = await fetch("/idiom.json");
-        const hanziDBResponse = await fetch("/hanziDB_top6000.json");
+        const hanziDBResponse = await fetch("/hanziDB.json");
 
         const idioms = await idiomsResponse.json();
         const hanziDB = await hanziDBResponse.json();

@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const StyledWinningChengyu = styled.div`
   background-color: transparent;
@@ -11,6 +20,7 @@ const StyledWinningChengyu = styled.div`
   color: #1c1c1c;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   font-weight: bold;
+  animation: ${fadeIn} 2s ease-in-out;
 `;
 
 export { StyledWinningChengyu };

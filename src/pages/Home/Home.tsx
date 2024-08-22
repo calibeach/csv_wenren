@@ -32,7 +32,6 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     console.log("Answers", chengyuAnswers);
-    console.log("GameTiles", gameTiles);
   }, [chengyuAnswers]);
 
   const checkWinningChengyu = () => {
@@ -45,17 +44,20 @@ const Home: React.FC = () => {
       setTimeout(() => {
         dispatch({ type: "SET_IS_ANIMATING", payload: false });
       }, 2500);
-      dispatch({
-        type: "SET_WINNING_CHENGYU",
-        payload: [...state.winningChengyu, joinedTiles],
-      });
+
       dispatch({
         type: "SET_CHENGYU_ANSWERS",
         payload: state.chengyuAnswers.filter(
           (chengyu: string) => chengyu !== joinedTiles
         ),
       });
-      resetTiles();
+      setTimeout(() => {
+        resetTiles();
+        dispatch({
+          type: "SET_WINNING_CHENGYU",
+          payload: [...state.winningChengyu, joinedTiles],
+        });
+      }, 4000);
     }
   };
 
@@ -69,7 +71,6 @@ const Home: React.FC = () => {
       type: "SET_EMPEROR_CHARACTER",
       payload: state.masterEmperorCharacter,
     });
-    console.log("Resetting tiles");
     dispatch({ type: "SET_SELECTED_TILES", payload: [] });
   };
 

@@ -12,7 +12,6 @@ const ChosenTilesArea: React.FC<ChosenTilesArea> = ({
   className,
 }) => {
   const [fadeOut, setFadeOut] = useState(false);
-  console.log("ChosenTilesArea", className);
   useEffect(() => {
     if (className === "fade-out") {
       setFadeOut(true);
