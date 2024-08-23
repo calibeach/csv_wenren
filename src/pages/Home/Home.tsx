@@ -117,12 +117,12 @@ const Home: React.FC = () => {
   return (
     <StyledHomeContainer>
       <StyledBackgroundImage
-        src="/src/assets/Chinese Tree.jpg"
+        src="/src/assets/misc/Chinese Tree.jpg"
         alt="Chinese Tree"
       />
       {isGuessCorrect && (
         <StyledImperialSeal
-          src="/src/assets/Imperial_Seal_transparent.png"
+          src="/src/assets/misc/Imperial_Seal_transparent.png"
           alt="Imperial Seal"
         />
       )}

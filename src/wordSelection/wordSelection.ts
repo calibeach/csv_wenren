@@ -1,4 +1,25 @@
-function selectWordsAndCharacters(idioms: any[], hanziDB: any[]) {
+interface Idiom {
+  derivation: string;
+  example: string;
+  explanation: string;
+  pinyin: string;
+  word: string;
+  abbreviation: string;
+}
+
+interface Hanzi {
+  frequency_rank: number;
+  charcter: string;
+  pinyin: string;
+  definition: string;
+  radical: string;
+  radical_code: number;
+  stroke_count: string;
+  hsk_level: number;
+  general_standard_num: number;
+}
+
+function selectWordsAndCharacters(idioms: Idiom[], hanziDB: Hanzi[]) {
   const shuffledHanziDB = shuffleArray([...hanziDB]);
   const shuffledIdioms = shuffleArray([...idioms]);
   // Randomly select a JSON object from hanziDB_top2000.json
@@ -8,8 +29,8 @@ function selectWordsAndCharacters(idioms: any[], hanziDB: any[]) {
 
   // Find all words in idiom.json that contain the selected character
   const wordsContainingCharacter = shuffledIdioms
-    .filter((idiom: any) => idiom.word.includes(selectedCharacter))
-    .map((idiom: any) => idiom.word);
+    .filter((idiom) => idiom.word.includes(selectedCharacter))
+    .map((idiom) => idiom.word);
 
   // Count the frequency of each character in the found words
   const characterFrequency: { [key: string]: number } = {};
@@ -69,8 +90,8 @@ function hasRepeatingCharacters(word: string): boolean {
 }
 
 function findValidCombination(
-  idioms: string[],
-  hanziDB: string[]
+  idioms: Idiom[],
+  hanziDB: Hanzi[]
 ): {
   resultWords: string[];
   allowedCharacters: string[];
