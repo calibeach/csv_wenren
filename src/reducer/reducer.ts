@@ -13,6 +13,8 @@ interface State {
   isAnimating: boolean;
   fetchError: string | null;
   isGuessCorrect: boolean;
+  pointsForCorrectGuess: number;
+  score: number;
 }
 
 // Define the Action type
@@ -29,7 +31,9 @@ type Action =
   | { type: "SET_IS_EMPEROR_ANIMATION_COMPLETE"; payload: boolean }
   | { type: "SET_IS_ANIMATING"; payload: boolean }
   | { type: "SET_FETCH_ERROR"; payload: string }
-  | { type: "SET_IS_GUESS_CORRECT"; payload: boolean };
+  | { type: "SET_IS_GUESS_CORRECT"; payload: boolean }
+  | { type: "SET_SCORE"; payload: number }
+  | { type: "SET_POINTS_FOR_CORRECT_GUESS"; payload: number };
 
 // Define the initial state
 const initialState: State = {
@@ -45,6 +49,8 @@ const initialState: State = {
   isAnimating: false,
   fetchError: null,
   isGuessCorrect: false,
+  score: 0,
+  pointsForCorrectGuess: 0,
 };
 
 // Define the reducer function
@@ -72,6 +78,10 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, isAnimating: action.payload };
     case "SET_IS_GUESS_CORRECT":
       return { ...state, isGuessCorrect: action.payload };
+    case "SET_SCORE":
+      return { ...state, score: action.payload };
+    case "SET_POINTS_FOR_CORRECT_GUESS":
+      return { ...state, pointsForCorrectGuess: action.payload };
     default:
       return state;
   }

@@ -19,6 +19,7 @@ const useFetchData = (dispatch: React.Dispatch<Action>): void => {
         const hanziDB = await hanziDBResponse.json();
 
         const result: FetchDataResult = findValidCombination(idioms, hanziDB);
+        const pointsForCorrectGuess = 100 / result.resultWords.length;
         dispatch({ type: "SET_CHENGYU_ANSWERS", payload: result.resultWords });
         const filteredAllowedCharacters = result.allowedCharacters.filter(
           (char) => char !== result.selectedCharacter
@@ -43,9 +44,13 @@ const useFetchData = (dispatch: React.Dispatch<Action>): void => {
           type: "SET_DATA",
           payload: result,
         });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        dispatch({ type: "SET_FETCH_ERROR", payload: error.message });
+        dispatch({
+          type: "SET_POINTS_FOR_CORRECT_GUESS",
+          payload: pointsForCorrectGuess,
+        });
+      } catch (error: Error) {
+          console.error("Error fetching data:", error);
+          dispatch({ type: "SET_FETCH_ERROR", payload: error.message });
       }
     };
 

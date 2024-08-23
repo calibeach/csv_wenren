@@ -11,12 +11,7 @@ const StyledGridContainer = styled.div`
   gap: 10px;
   box-sizing: border-box;
   min-width: 300px;
-  margin-left: 38px;
-  .fade-out {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 2s ease-in-out, transform 2s ease-in-out;
-  }
+  margin-left: 140px;
 `;
 
 export { StyledGridContainer };

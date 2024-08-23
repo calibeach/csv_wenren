@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
+
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -10,8 +11,9 @@ const fadeIn = keyframes`
 
 const StyledHomeContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   height: 100vh;
   width: 100vw;
   font-family: "KaiTi", serif;
@@ -25,6 +27,7 @@ const StyledEmperorTile = styled.div`
   align-items: center;
   flex-direction: row;
 `;
+
 const StyledBackgroundImage = styled.img`
   width: 36vw;
   height: 100%;
@@ -40,6 +43,7 @@ const StyledImperialSeal = styled.img`
   width: 100px;
   height: 100px;
   object-fit: cover;
+  position: relative;
   position: absolute;
   top: 60%;
   left: 40%;
@@ -73,6 +77,7 @@ const StyledSelectedTile = styled.div`
   align-items: center;
   flex-direction: row;
 `;
+
 const StyledPlayingArea = styled.div`
   position: relative;
   display: flex;
@@ -94,7 +99,6 @@ const StyledCharacterArea = styled.div`
 
 const StyledWinningChengyuBoard = styled.div`
   display: flex;
-  margin-top: 100px;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
@@ -102,6 +106,13 @@ const StyledWinningChengyuBoard = styled.div`
   width: 35vw;
   padding: 20px; /* Add padding if needed */
   background-color: transparent; /* Customize as needed */
+`;
+
+const StyledScoringArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export {
@@ -114,4 +125,5 @@ export {
   StyledBackgroundImage,
   StyledCharacterArea,
   StyledImperialSeal,
+  StyledScoringArea,
 };

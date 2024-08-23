@@ -6,12 +6,14 @@ import {
   StyledPlayingArea,
   StyledBackgroundImage,
   StyledImperialSeal,
+  StyledScoringArea,
 } from "./StyledHome";
-import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
-import ChosenTilesArea from "../../components/PlayingArea/PlayingArea";
-import { reducer, initialState } from "../../reducer/reducer";
 import useFetchData from "../../customHooks/useFetchData";
+import { reducer, initialState } from "../../reducer/reducer";
+import ChosenTilesArea from "../../components/PlayingArea/PlayingArea";
 import { CharacterArea } from "../../components/CharacterArea/CharacterArea";
+import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
+import { AchievementLevels } from "../../components/AchievementLevels/AchievementLevels";
 
 const Home: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -25,6 +27,8 @@ const Home: React.FC = () => {
     isEmperorAnimationComplete,
     isAnimating,
     isGuessCorrect,
+    pointsForCorrectGuess,
+    score,
   } = state;
   useFetchData(dispatch);
 
@@ -35,10 +39,6 @@ const Home: React.FC = () => {
   useEffect(() => {
     console.log("Answers", chengyuAnswers);
   }, [chengyuAnswers]);
-
-  useEffect(() => {
-    console.log("isGuessCorrect", isGuessCorrect);
-  }, [isGuessCorrect]);
 
   const checkWinningChengyu = () => {
     if (selectedTiles.length < 4) {
@@ -51,6 +51,10 @@ const Home: React.FC = () => {
         dispatch({ type: "SET_IS_ANIMATING", payload: false });
       }, 2500);
 
+      dispatch({
+        type: "SET_SCORE",
+        payload: score + pointsForCorrectGuess,
+      });
       dispatch({
         type: "SET_CHENGYU_ANSWERS",
         payload: state.chengyuAnswers.filter(
@@ -140,13 +144,18 @@ const Home: React.FC = () => {
             chosenCharacters={selectedTiles}
             className={isAnimating ? "fade-out" : ""}
           />
-          {winningChengyu && (
-            <StyledWinningChengyuBoard className={isAnimating ? "fade-in" : ""}>
-              {winningChengyu.map((chengyu: string, index: number) => (
-                <WinningChengyu key={index} winningChengYu={chengyu} />
-              ))}
-            </StyledWinningChengyuBoard>
-          )}
+          <StyledScoringArea>
+            <AchievementLevels score={score} />
+            {winningChengyu && (
+              <StyledWinningChengyuBoard
+                className={isAnimating ? "fade-in" : ""}
+              >
+                {winningChengyu.map((chengyu: string, index: number) => (
+                  <WinningChengyu key={index} winningChengYu={chengyu} />
+                ))}
+              </StyledWinningChengyuBoard>
+            )}
+          </StyledScoringArea>
         </StyledPlayingArea>
       )}
     </StyledHomeContainer>
