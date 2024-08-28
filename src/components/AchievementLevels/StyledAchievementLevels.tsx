@@ -15,8 +15,8 @@ const StyledAchievementLevels = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  height: 35vh;
-  width: 35vw;
+  height: 35%;
+  width: 35%;
   padding: 0px;
   background-color: transparent;
 

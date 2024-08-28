@@ -7,8 +7,8 @@ const StyledCharacterArea = styled.div`
   flex-direction: column;
   margin-top: 2rem;
   font-size: 1.5rem;
-  height: 100vh;
-  width: 30vw;
+  height: 100%;
+  width: 30%;
   font-weight: bold;
 `;
 

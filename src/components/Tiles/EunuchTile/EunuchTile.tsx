@@ -21,9 +21,9 @@ const EunuchTile: React.FC<EunuchTileProps> = ({
       characterRef.current.innerHTML = "";
 
       writer = HanziWriter.create(characterRef.current, eunuchCharacter, {
-        width: 120,
-        height: 120,
-        padding: 5,
+        width: 100,
+        height: 100,
+        padding: 0,
       });
     }
 

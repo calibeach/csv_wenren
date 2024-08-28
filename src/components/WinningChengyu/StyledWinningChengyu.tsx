@@ -13,7 +13,7 @@ const StyledWinningChengyu = styled.div`
   background-color: transparent;
   border-radius: 10px;
   display: flex;
-  width: 35vw;
+  width: 35%;
   align-items: center;
   justify-content: center;
   font-family: "KaiTi", serif; /* Assuming you have a font that looks like Mahjong characters */

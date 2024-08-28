@@ -11,11 +11,12 @@ const fadeIn = keyframes`
 
 const StyledHomeContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
+  max-width: 1280px;
   font-family: "KaiTi", serif;
   color: #1c1c1c;
   position: relative;
@@ -29,7 +30,7 @@ const StyledEmperorTile = styled.div`
 `;
 
 const StyledBackgroundImage = styled.img`
-  width: 36vw;
+  width: 35%;
   height: 100%;
   object-fit: cover;
   position: absolute;
@@ -85,8 +86,9 @@ const StyledPlayingArea = styled.div`
   align-items: center;
   flex-direction: row;
   height: 100vh;
-  border: 1px solid green;
+  max-width: 1280px;
   z-index: 1000;
+  border: 1px solid black;
 `;
 
 const StyledCharacterArea = styled.div`

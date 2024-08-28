@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const StyledEunuch = styled.div`
-  width: 100px;
+  width: 80px;
   height: 100px;
-  padding: 10px;
+  padding: 4px;
   background-color: transparent;
   border-radius: 10px;
   display: flex;
