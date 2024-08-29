@@ -11,8 +11,7 @@ const StyledGridContainer = styled.div`
   gap: 10px;
   box-sizing: border-box;
   min-width: 300px;
-  margin-left: 116px;
-  border: 1px solid pink;
+  margin-left: 140px;
 `;
 
 export { StyledGridContainer };

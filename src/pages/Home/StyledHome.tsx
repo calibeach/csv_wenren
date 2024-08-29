@@ -88,7 +88,6 @@ const StyledPlayingArea = styled.div`
   height: 100vh;
   max-width: 1280px;
   z-index: 1000;
-  border: 1px solid black;
 `;
 
 const StyledCharacterArea = styled.div`
@@ -104,7 +103,7 @@ const StyledWinningChengyuBoard = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 35vw;
   padding: 20px; /* Add padding if needed */
   background-color: transparent; /* Customize as needed */
@@ -112,9 +111,18 @@ const StyledWinningChengyuBoard = styled.div`
 
 const StyledScoringArea = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  margin-top: 20px;
+`;
+
+const StyledScoringAreaContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
 `;
 
 export {
@@ -128,4 +136,5 @@ export {
   StyledCharacterArea,
   StyledImperialSeal,
   StyledScoringArea,
+  StyledScoringAreaContainer,
 };

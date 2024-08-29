@@ -10,6 +10,7 @@ const StyledCharacterArea = styled.div`
   height: 100%;
   width: 30%;
   font-weight: bold;
+  margin-left: 1rem;
 `;
 
 const StyledEmperorTile = styled.div`

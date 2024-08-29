@@ -20,9 +20,9 @@ const AchievementLevelTile: React.FC<AchievementLevelTileProps> = ({
       characterRef.current.innerHTML = "";
 
       writer = HanziWriter.create(characterRef.current, achievementLevelTile, {
-        width: 120,
-        height: 120,
-        padding: 5,
+        width: 80,
+        height: 80,
+        padding: 1,
       });
     }
 

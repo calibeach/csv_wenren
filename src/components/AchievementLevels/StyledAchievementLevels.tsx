@@ -11,13 +11,14 @@ const fadeIn = keyframes`
 
 const StyledAchievementLevels = styled.div`
   display: flex;
-  margin-top: 250px;
+  margin-top: 20px;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   height: 35%;
   width: 35%;
   padding: 0px;
+  margin-left: 44px;
   background-color: transparent;
 
   &.fade-in {
@@ -26,10 +27,10 @@ const StyledAchievementLevels = styled.div`
 `;
 
 const StyledAchievementSeal = styled.img`
-  margin-top: -28px;
-  margin-right: 20px;
-  width: 100px;
-  height: 100px;
+  margin-top: -4px;
+  margin-right: 4px;
+  width: 60px;
+  height: 60px;
   z-index: 1000;
 
   &.opaque {

@@ -7,6 +7,7 @@ import {
   StyledBackgroundImage,
   StyledImperialSeal,
   StyledScoringArea,
+  StyledScoringAreaContainer,
 } from "./StyledHome";
 import useFetchData from "../../customHooks/useFetchData";
 import { reducer, initialState } from "../../reducer/reducer";
@@ -144,18 +145,20 @@ const Home: React.FC = () => {
             chosenCharacters={selectedTiles}
             className={isAnimating ? "fade-out" : ""}
           />
-          <StyledScoringArea>
-            <AchievementLevels score={score} />
-            {winningChengyu && (
-              <StyledWinningChengyuBoard
-                className={isAnimating ? "fade-in" : ""}
-              >
-                {winningChengyu.map((chengyu: string, index: number) => (
-                  <WinningChengyu key={index} winningChengYu={chengyu} />
-                ))}
-              </StyledWinningChengyuBoard>
-            )}
-          </StyledScoringArea>
+          <StyledScoringAreaContainer>
+            <StyledScoringArea>
+              <AchievementLevels score={score} />
+              {winningChengyu && (
+                <StyledWinningChengyuBoard
+                  className={isAnimating ? "fade-in" : ""}
+                >
+                  {winningChengyu.map((chengyu: string, index: number) => (
+                    <WinningChengyu key={index} winningChengYu={chengyu} />
+                  ))}
+                </StyledWinningChengyuBoard>
+              )}
+            </StyledScoringArea>
+          </StyledScoringAreaContainer>
         </StyledPlayingArea>
       )}
     </StyledHomeContainer>
