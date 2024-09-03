@@ -119,7 +119,7 @@ const StyledScoringArea = styled.div`
 
 const StyledScoringAreaContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
   height: 100%;

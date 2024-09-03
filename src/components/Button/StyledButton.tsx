@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledButton = styled.button.attrs({ type: "button" })`
   border: none;
-  border-radius: 25%;
+  border-radius: 15px;
   height: 50px;
   width: 100px;
   border: 1px solid #ccc;
@@ -25,30 +25,6 @@ const StyledButton = styled.button.attrs({ type: "button" })`
     border-color: #888;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     transform: scale(0.98);
-  }
-
-  &.new-game {
-    background-color: #ff4c4c;
-    color: #fff;
-    border-color: #ff4c4c;
-  }
-
-  &.reset-tiles {
-    background-color: #4caf50;
-    color: #fff;
-    border-color: #4caf50;
-  }
-
-  &.donate {
-    background-color: #ff9800;
-    color: #fff;
-    border-color: #ff9800;
-  }
-
-  &.settings {
-    background-color: #2196f3;
-    color: #fff;
-    border-color: #2196f3;
   }
 `;
 
