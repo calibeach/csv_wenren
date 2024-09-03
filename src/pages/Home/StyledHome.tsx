@@ -123,6 +123,7 @@ const StyledScoringAreaContainer = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100%;
+  width: 35%;
 `;
 
 export {

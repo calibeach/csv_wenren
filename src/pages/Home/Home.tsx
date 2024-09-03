@@ -12,6 +12,7 @@ import {
 import useFetchData from "../../customHooks/useFetchData";
 import { reducer, initialState } from "../../reducer/reducer";
 import ChosenTilesArea from "../../components/PlayingArea/PlayingArea";
+import { GameControls } from "../../components/GameControls/GameControls";
 import { CharacterArea } from "../../components/CharacterArea/CharacterArea";
 import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
 import { AchievementLevels } from "../../components/AchievementLevels/AchievementLevels";
@@ -31,7 +32,12 @@ const Home: React.FC = () => {
     pointsForCorrectGuess,
     score,
   } = state;
-  useFetchData(dispatch);
+
+  const fetchData = useFetchData(dispatch);
+
+  useEffect(() => {
+    fetchData(); // Fetch data when the component mounts
+  }, [fetchData]);
 
   const handleEmperorAnimationEnd = () => {
     dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: true });
@@ -158,6 +164,7 @@ const Home: React.FC = () => {
                 </StyledWinningChengyuBoard>
               )}
             </StyledScoringArea>
+            <GameControls fetchData={fetchData} />
           </StyledScoringAreaContainer>
         </StyledPlayingArea>
       )}
