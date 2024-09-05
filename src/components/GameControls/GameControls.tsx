@@ -34,7 +34,6 @@ const GameControls: React.FC<GameControlsProps> = ({
     isDonationsModalOpen,
     openDonationsModal,
     closeDonationsModal,
-    isNewGameModalOpen,
   } = useModals();
   const handleNewGameClick = () => {
     console.log("New Game Clicked");
