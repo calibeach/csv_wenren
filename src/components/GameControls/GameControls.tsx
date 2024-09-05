@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
+import Modals from "../Modals/Modals";
+import { useModals } from "../../customHooks/useModals";
 import menu2 from "../../assets/misc/menu.jpg";
 import RestoreIcon from "@mui/icons-material/Restore";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -19,6 +21,21 @@ const GameControls: React.FC<GameControlsProps> = ({
   fetchData,
   resetTiles,
 }) => {
+  const {
+    isSettingsModalOpen,
+    openSettingsModal,
+    closeSettingsModal,
+    isShareModalOpen,
+    openShareModal,
+    closeShareModal,
+    isInstructionsModalOpen,
+    openInstructionsModal,
+    closeInstructionsModal,
+    isDonationsModalOpen,
+    openDonationsModal,
+    closeDonationsModal,
+    isNewGameModalOpen,
+  } = useModals();
   const handleNewGameClick = () => {
     console.log("New Game Clicked");
     fetchData();
@@ -29,10 +46,18 @@ const GameControls: React.FC<GameControlsProps> = ({
   };
 
   const actions = [
-    { icon: <SettingsIcon />, name: "Settings" },
-    { icon: <CelebrationIcon />, name: "Share" },
-    { icon: <MenuBookIcon />, name: "Instructions" },
-    { icon: <VolunteerActivismIcon />, name: "Donations" },
+    { icon: <SettingsIcon />, name: "Settings", onClick: openSettingsModal },
+    { icon: <CelebrationIcon />, name: "Share", onClick: openShareModal },
+    {
+      icon: <MenuBookIcon />,
+      name: "Instructions",
+      onClick: openInstructionsModal,
+    },
+    {
+      icon: <VolunteerActivismIcon />,
+      name: "Donations",
+      onClick: openDonationsModal,
+    },
     {
       icon: <RestoreIcon />,
       name: "Reset Tiles",
@@ -66,6 +91,16 @@ const GameControls: React.FC<GameControlsProps> = ({
           />
         ))}
       </SpeedDial>
+      <Modals
+        isSettingsModalOpen={isSettingsModalOpen}
+        closeSettingsModal={closeSettingsModal}
+        isShareModalOpen={isShareModalOpen}
+        closeShareModal={closeShareModal}
+        isInstructionsModalOpen={isInstructionsModalOpen}
+        closeInstructionsModal={closeInstructionsModal}
+        isDonationsModalOpen={isDonationsModalOpen}
+        closeDonationsModal={closeDonationsModal}
+      />
     </StyledGameControlsContainer>
   );
 };

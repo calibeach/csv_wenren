@@ -126,6 +126,7 @@ const Home: React.FC = () => {
   };
 
   return (
+    // <div class="sharethis-inline-share-buttons"></div>
     <StyledHomeContainer>
       <StyledBackgroundImage
         src="/src/assets/misc/Chinese Tree.jpg"
