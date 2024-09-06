@@ -2,7 +2,7 @@ import React from "react";
 import ReusableModal from "../ReusableModal/ReusableModal";
 
 // import { StyledModalContainer } from "./StyledModals";
-import { generateHanziCSV } from "../../customHooks/useCreateCSV2";
+import { generateHanziCSV } from "../../customHooks/useCreateCSV";
 
 interface ModalsProps {
   isSettingsModalOpen: boolean;

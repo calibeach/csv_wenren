@@ -3,10 +3,11 @@ import * as Papa from "papaparse";
 
 // Batch size for emperor characters
 const EMPEROR_BATCH_SIZE = 100;
-const COMBINATION_BATCH_SIZE = 100000; // Batch size for eunuch combinations
+const COMBINATION_BATCH_SIZE = 500000; // Batch size for eunuch combinations
 
 // Generate CSV content using fetched data
 export const generateHanziCSV = async () => {
+  const tempEmperorBatch = ["人"];
   console.log("Generating CSV...");
   try {
     // Fetch idioms and hanzi data
@@ -29,30 +30,45 @@ export const generateHanziCSV = async () => {
     };
 
     // Generate combinations of eight eunuchs in batches
+    const shuffleArray = (array: string[]): string[] => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    };
+
     const getCombinationsBatch = (
       eunuchs: string[],
       combinationLength: number,
       startIndex: number
     ): string[][] => {
-      const results: string[][] = [];
+      const results: Set<string> = new Set();
+      const shuffledEunuchs = shuffleArray([...eunuchs]); // Shuffle the eunuchs array
 
-      const helper = (path: string[], index: number) => {
-        if (results.length >= COMBINATION_BATCH_SIZE) return; // Stop early to prevent memory overflow
+      const helper = (path: string[], usedIndices: Set<number>) => {
+        if (results.size >= COMBINATION_BATCH_SIZE) return; // Stop early to prevent memory overflow
         if (path.length === combinationLength) {
-          results.push([...path]);
+          results.add(path.join(","));
           return;
         }
-        for (let i = index; i < eunuchs.length; i++) {
-          path.push(eunuchs[i]);
-          helper(path, i + 1);
-          path.pop();
+
+        for (let i = 0; i < shuffledEunuchs.length; i++) {
+          if (!usedIndices.has(i)) {
+            usedIndices.add(i);
+            path.push(shuffledEunuchs[i]);
+            helper(path, usedIndices);
+            path.pop();
+            usedIndices.delete(i);
+          }
         }
       };
 
-      helper([], startIndex);
-      return results;
-    };
+      helper([], new Set());
 
+      // Convert the set of strings back to an array of arrays
+      return Array.from(results).map((combination) => combination.split(","));
+    };
     // Check if an idiom can be formed from a combination of characters
     const canFormIdiom = (
       word: string,
@@ -78,7 +94,7 @@ export const generateHanziCSV = async () => {
       console.log("processEmperorBatch - start");
       console.log("emperorBatch:", emperorBatch);
       emperorBatch.forEach((hanzi, index) => {
-        const emperorChar = hanzi.charcter;
+        const emperorChar = hanzi;
         console.log(
           `Processing emperorChar ${index + 1}/${
             emperorBatch.length
@@ -92,7 +108,6 @@ export const generateHanziCSV = async () => {
           new Set(
             filteredIdioms
               .flatMap((idiom) => {
-                console.log("Processing idiom:", idiom);
                 return idiom.word.split("");
               })
               .filter((char) => {
@@ -114,6 +129,8 @@ export const generateHanziCSV = async () => {
             startIndex
           );
           if (combinations.length === 0) break;
+
+          console.log("Combinations:", combinations);
 
           combinations.forEach((combination) => {
             const matchingIdioms = filteredIdioms.filter((idiom) =>
@@ -151,14 +168,22 @@ export const generateHanziCSV = async () => {
         chengyu: string[];
       }[] = [];
 
-      while (startIndex < hanziDB.length) {
+      let count = 0;
+
+      // while (startIndex < hanziDB.length) {
+      while (count < tempEmperorBatch.length) {
         const emperorBatch = hanziDB.slice(
           startIndex,
           startIndex + EMPEROR_BATCH_SIZE
         );
-        const batchResults = processEmperorBatch(emperorBatch, hanziDB, idioms);
+        const batchResults = processEmperorBatch(
+          tempEmperorBatch,
+          hanziDB,
+          idioms
+        );
         allValidTileSets.push(...batchResults);
         startIndex += EMPEROR_BATCH_SIZE;
+        count++;
       }
       return allValidTileSets;
     };
