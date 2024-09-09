@@ -36,7 +36,6 @@ const GameControls: React.FC<GameControlsProps> = ({
     closeDonationsModal,
   } = useModals();
   const handleNewGameClick = () => {
-    console.log("New Game Clicked");
     fetchData();
   };
 

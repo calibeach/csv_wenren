@@ -59,13 +59,13 @@ const Modals: React.FC<ModalsProps> = ({
           the characters on the left-hand side of the screen.
         </p>
         <p>
-          <strong>Rules: </strong> You must use the "文人" character at least
-          once in the 成语. The "文人" character is the large character on the
-          left.
+          <strong>Rules: </strong> The "文人" character is the large character
+          on the left. You must use the "文人" character at least once in the
+          成语.
         </p>
         <p>
-          <strong>Achievements: </strong>Watch your literary level grow on the
-          upper right as you successfully identify 成语
+          <strong>Achievements: </strong>Watch your literary level grow in the
+          upper right-hand corner as you successfully identify 成语
         </p>
       </ReusableModal>
 

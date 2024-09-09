@@ -69,14 +69,12 @@ const Home: React.FC = () => {
         ),
       });
       setTimeout(() => {
-        console.log("Correct Guess");
         dispatch({
           type: "SET_IS_GUESS_CORRECT",
           payload: true,
         });
       }, 1000);
       setTimeout(() => {
-        console.log("Winning Chengyu", joinedTiles);
         resetTiles();
         dispatch({
           type: "SET_WINNING_CHENGYU",

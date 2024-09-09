@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const useModals = () => {
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
@@ -17,10 +17,6 @@ export const useModals = () => {
 
   const openDonationsModal = () => setIsDonationsModalOpen(true);
   const closeDonationsModal = () => setIsDonationsModalOpen(false);
-
-  useEffect(() => {
-    console.log("isSettingsModalOpen", isSettingsModalOpen);
-  }, [isSettingsModalOpen]);
 
   return {
     isSettingsModalOpen,

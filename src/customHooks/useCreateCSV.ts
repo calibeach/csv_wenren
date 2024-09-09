@@ -42,17 +42,6 @@ function areAllCharactersUsed(
   );
 }
 
-function hasRepeatingCharacters(word: string): boolean {
-  const charSet = new Set();
-  for (const char of word) {
-    if (charSet.has(char)) {
-      return true;
-    }
-    charSet.add(char);
-  }
-  return false;
-}
-
 let count = 0;
 function selectWordsForCharacter(
   idioms: Idiom[],
@@ -88,10 +77,11 @@ function selectWordsForCharacter(
   // Find the 16 most common characters excluding the selected character
   const mostCommonCharacters = Object.entries(characterFrequency)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 16)
-    .map((entry) => entry[0]);
+    .map((entry) => entry[0])
+    .filter((char) => char !== "，")
+    .slice(0, 24);
 
-  // Generate all combinations of the 16 most common characters
+  // Generate all combinations of the 24 most common characters
   const combinations = getAllCombinations(mostCommonCharacters, 8);
 
   let bestResult = null;
@@ -108,8 +98,7 @@ function selectWordsForCharacter(
     // Apply the validation checks
     if (
       areAllCharactersUsed(resultWords, allowedCharacters) &&
-      resultWords.length > 4 && // Ensure there are enough words
-      !resultWords.some(hasRepeatingCharacters)
+      resultWords.length > 4
     ) {
       if (!bestResult || resultWords.length > bestResult.resultWords.length) {
         bestResult = {
@@ -149,7 +138,9 @@ function generateCSV(
 ): string {
   const header = "SelectedCharacter,AllowedCharacters,ResultWords\n";
   const rows = data.map((entry) => {
-    const allowedCharacters = entry.allowedCharacters.join(" ");
+    const allowedCharacters = entry.allowedCharacters
+      .filter((char) => char !== entry.selectedCharacter)
+      .join(" ");
     const resultWords = entry.resultWords.join(" ");
     return `${entry.selectedCharacter},${allowedCharacters},${resultWords}`;
   });
