@@ -1,7 +1,8 @@
 import React from "react";
 import ReusableModal from "../ReusableModal/ReusableModal";
 
-// import { StyledModalContainer } from "./StyledModals";
+import { Button } from "../Button/Button";
+import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import { generateHanziCSV } from "../../customHooks/useCreateCSV";
 
 interface ModalsProps {
@@ -27,6 +28,13 @@ const Modals: React.FC<ModalsProps> = ({
   const handleGenerateCSV = () => {
     generateHanziCSV(); // Call the CSV generation function
   };
+  const handleOpenDonationPage = () => {
+    window.open(
+      "https://www.paypal.com/donate/?hosted_button_id=UQRGCK75RX2QA",
+      "_blank"
+    );
+  };
+
   return (
     <>
       <ReusableModal
@@ -74,7 +82,31 @@ const Modals: React.FC<ModalsProps> = ({
         onRequestClose={closeDonationsModal}
         title="Donations"
       >
-        <h1>Donations</h1>
+        <p>
+          Creating 文人 has been a labor of love, and now, I'd love to have you
+          involved. <br />
+          <br />
+          If you’ve enjoyed using it, consider making a small donation to help
+          us keep the servers running and bring new features your way.
+          <br />
+          <br />
+          Even better, 10% of all donations will go to Alzheimer’s Disease
+          International, supporting critical research and care for those
+          affected by dementia.
+          <br />
+          <br />
+          Thanks so much for being part of this community—your support really
+          helps us grow and do more!
+          <br />
+          <br />
+        </p>
+        <Button onClick={handleOpenDonationPage}>
+          {" "}
+          <LocalFloristIcon
+            style={{ marginRight: "16px", verticalAlign: "middle" }}
+          />
+          Help Us Grow!
+        </Button>
       </ReusableModal>
     </>
   );
