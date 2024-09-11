@@ -8,8 +8,6 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
   // Check for token in localStorage as a fallback
   const token = localStorage.getItem("authToken");
-  console.log("Token", token);
-
   if (!token) {
     // Redirect to login if not authenticated
     return <Navigate to="/login" />;

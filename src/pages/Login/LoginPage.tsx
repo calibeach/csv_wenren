@@ -3,6 +3,12 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+import {
+  StyledLoginPageContainer,
+  StyledInput,
+  StyledForm,
+} from "./StyledLoginPage";
+
 const LoginPage = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -23,33 +29,29 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <StyledLoginPageContainer>
+      <StyledForm onSubmit={handleSubmit}>
         <div>
-          <label>Username:</label>
-          <input
+          <StyledInput
             title="Username"
             type="text"
-            placeholder="Enter your username"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div>
-          <label>Password:</label>
-          <input
+          <StyledInput
             title="Password"
             type="password"
-            placeholder="Enter your password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button type="submit">Login</button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </div>
+      </StyledForm>
+    </StyledLoginPageContainer>
   );
 };
 
