@@ -7,6 +7,7 @@ import {
   StyledLoginPageContainer,
   StyledInput,
   StyledForm,
+  StyledButton,
 } from "./StyledLoginPage";
 
 const LoginPage = () => {
@@ -49,7 +50,7 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">Login</button>
+        <StyledButton type="submit">Login</StyledButton>
       </StyledForm>
     </StyledLoginPageContainer>
   );
