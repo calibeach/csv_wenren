@@ -11,15 +11,18 @@ import CelebrationIcon from "@mui/icons-material/Celebration";
 import { StyledGameControlsContainer } from "./StyledGameControls";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import { Action } from "../../reducer/reducer";
 
 interface GameControlsProps {
   fetchData: () => void;
   resetTiles: () => void;
+  dispatch: React.Dispatch<Action>;
 }
 
 const GameControls: React.FC<GameControlsProps> = ({
   fetchData,
   resetTiles,
+  dispatch,
 }) => {
   const {
     isSettingsModalOpen,
@@ -36,6 +39,7 @@ const GameControls: React.FC<GameControlsProps> = ({
     closeDonationsModal,
   } = useModals();
   const handleNewGameClick = () => {
+    dispatch({ type: "CLEAR_WINNING_CHENGYU", payload: [] });
     fetchData();
   };
 

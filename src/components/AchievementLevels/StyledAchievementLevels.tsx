@@ -27,7 +27,7 @@ const StyledAchievementLevels = styled.div`
 `;
 
 const StyledAchievementSeal = styled.img`
-  margin-top: -4px;
+  margin-top: -12px;
   margin-right: 4px;
   width: 60px;
   height: 60px;

@@ -162,7 +162,11 @@ const Home: React.FC = () => {
                 </StyledWinningChengyuBoard>
               )}
             </StyledScoringArea>
-            <GameControls fetchData={fetchData} resetTiles={resetTiles} />
+            <GameControls
+              fetchData={fetchData}
+              resetTiles={resetTiles}
+              dispatch={dispatch}
+            />
           </StyledScoringAreaContainer>
         </StyledPlayingArea>
       )}

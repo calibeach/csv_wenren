@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const StyledAchievementLevelTile = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   background-color: transparent;
   border-radius: 10px;
   display: flex;

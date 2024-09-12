@@ -2,13 +2,11 @@ import styled from "styled-components";
 
 const StyledWinningTile = styled.div`
   margin: 0 5px; /* Adjust this value to bring tiles closer together */
-  padding: 5px;
+  padding: 2px;
   background-color: transparent;
-  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
   font-family: "KaiTi", serif;
   color: #1c1c1c;
   box-sizing: border-box; /* Include padding and border in the element's total width and height */

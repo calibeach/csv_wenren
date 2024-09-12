@@ -33,7 +33,8 @@ type Action =
   | { type: "SET_FETCH_ERROR"; payload: string }
   | { type: "SET_IS_GUESS_CORRECT"; payload: boolean }
   | { type: "SET_SCORE"; payload: number }
-  | { type: "SET_POINTS_FOR_CORRECT_GUESS"; payload: number };
+  | { type: "SET_POINTS_FOR_CORRECT_GUESS"; payload: number }
+  | { type: "CLEAR_WINNING_CHENGYU"; payload: [] };
 
 // Define the initial state
 const initialState: State = {
@@ -82,6 +83,9 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, score: action.payload };
     case "SET_POINTS_FOR_CORRECT_GUESS":
       return { ...state, pointsForCorrectGuess: action.payload };
+    case "CLEAR_WINNING_CHENGYU":
+      console.log("Clearing winningChengyu:", action.payload);
+      return { ...state, winningChengyu: action.payload };
     default:
       return state;
   }

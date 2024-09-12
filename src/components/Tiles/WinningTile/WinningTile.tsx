@@ -14,7 +14,7 @@ const WinningCharacterTile: React.FC<WinningTileProps> = ({
     () => ({
       width: 60,
       height: 60,
-      padding: 5,
+      padding: 2,
       showOutline: false,
       showCharacter: true,
     }),
