@@ -46,6 +46,9 @@ const Home: React.FC = () => {
   useEffect(() => {
     console.log("Answers", chengyuAnswers);
   }, [chengyuAnswers]);
+  useEffect(() => {
+    console.log("Points", score);
+  }, [score]);
 
   const checkWinningChengyu = () => {
     if (selectedTiles.length < 4) {
@@ -166,6 +169,7 @@ const Home: React.FC = () => {
               fetchData={fetchData}
               resetTiles={resetTiles}
               dispatch={dispatch}
+              score={score}
             />
           </StyledScoringAreaContainer>
         </StyledPlayingArea>

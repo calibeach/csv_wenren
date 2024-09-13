@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReusableModal from "../ReusableModal/ReusableModal";
 
 import { Button } from "../Button/Button";
+import { StyledWinningAward } from "./StyledModals";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import { generateHanziCSV } from "../../customHooks/useCreateCSV";
+import { StyledAchievementSeal } from "../AchievementLevels/StyledAchievementLevels";
+import { AchievementLevelTile } from "../Tiles/AchievementLevelTiles/AchievementLevelTile";
 
 interface ModalsProps {
   isSettingsModalOpen: boolean;
@@ -14,7 +17,12 @@ interface ModalsProps {
   closeInstructionsModal: () => void;
   isDonationsModalOpen: boolean;
   closeDonationsModal: () => void;
+  isWinningModalOpen: boolean;
+  openWinningModal: () => void;
+  closeWinningModal: () => void;
+  score: number;
 }
+
 const Modals: React.FC<ModalsProps> = ({
   isSettingsModalOpen,
   closeSettingsModal,
@@ -24,7 +32,17 @@ const Modals: React.FC<ModalsProps> = ({
   closeInstructionsModal,
   isDonationsModalOpen,
   closeDonationsModal,
+  isWinningModalOpen,
+  openWinningModal,
+  closeWinningModal,
+  score,
 }) => {
+  useEffect(() => {
+    if (score > 99) {
+      openWinningModal();
+    }
+  }, [score, openWinningModal]);
+
   const handleGenerateCSV = () => {
     generateHanziCSV(); // Call the CSV generation function
   };
@@ -34,6 +52,8 @@ const Modals: React.FC<ModalsProps> = ({
       "_blank"
     );
   };
+
+  const winningCharacters = ["文", "雅", "之", "人"];
 
   return (
     <>
@@ -107,6 +127,23 @@ const Modals: React.FC<ModalsProps> = ({
           />
           Help Us Grow!
         </Button>
+      </ReusableModal>
+      <ReusableModal
+        isOpen={isWinningModalOpen}
+        onRequestClose={closeWinningModal}
+        title="您已获得排名"
+      >
+        <StyledWinningAward>
+          <StyledAchievementSeal
+            src={"/src/assets/level_seals/8_literati_transparent.png"}
+          />
+          {winningCharacters.map((character, index) => (
+            <AchievementLevelTile
+              key={index}
+              achievementLevelTile={character}
+            />
+          ))}
+        </StyledWinningAward>
       </ReusableModal>
     </>
   );

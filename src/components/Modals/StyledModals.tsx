@@ -8,4 +8,17 @@ const StyledModalContainer = styled.div`
   background-color: #dfdfd7;
 `;
 
-export { StyledModalContainer };
+const StyledWinningAward = styled.div`
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 35%;
+  width: 35%;
+  padding: 0px;
+  margin-left: 44px;
+  background-color: transparent;
+`;
+
+export { StyledModalContainer, StyledWinningAward };

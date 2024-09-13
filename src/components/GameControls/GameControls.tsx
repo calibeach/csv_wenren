@@ -17,12 +17,14 @@ interface GameControlsProps {
   fetchData: () => void;
   resetTiles: () => void;
   dispatch: React.Dispatch<Action>;
+  score: number;
 }
 
 const GameControls: React.FC<GameControlsProps> = ({
   fetchData,
   resetTiles,
   dispatch,
+  score,
 }) => {
   const {
     isSettingsModalOpen,
@@ -37,7 +39,11 @@ const GameControls: React.FC<GameControlsProps> = ({
     isDonationsModalOpen,
     openDonationsModal,
     closeDonationsModal,
+    isWinningModalOpen,
+    openWinningModal,
+    closeWinningModal,
   } = useModals();
+
   const handleNewGameClick = () => {
     dispatch({ type: "CLEAR_WINNING_CHENGYU", payload: [] });
     fetchData();
@@ -102,6 +108,10 @@ const GameControls: React.FC<GameControlsProps> = ({
         closeInstructionsModal={closeInstructionsModal}
         isDonationsModalOpen={isDonationsModalOpen}
         closeDonationsModal={closeDonationsModal}
+        isWinningModalOpen={isWinningModalOpen}
+        openWinningModal={openWinningModal}
+        closeWinningModal={closeWinningModal}
+        score={score}
       />
     </StyledGameControlsContainer>
   );

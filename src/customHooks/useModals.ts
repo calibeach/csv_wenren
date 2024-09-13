@@ -5,6 +5,7 @@ export const useModals = () => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState(false);
   const [isDonationsModalOpen, setIsDonationsModalOpen] = useState(false);
+  const [isWinningModalOpen, setIsWinningModalOpen] = useState(false);
 
   const openSettingsModal = () => setIsSettingsModalOpen(true);
   const closeSettingsModal = () => setIsSettingsModalOpen(false);
@@ -17,6 +18,9 @@ export const useModals = () => {
 
   const openDonationsModal = () => setIsDonationsModalOpen(true);
   const closeDonationsModal = () => setIsDonationsModalOpen(false);
+
+  const openWinningModal = () => setIsWinningModalOpen(true);
+  const closeWinningModal = () => setIsWinningModalOpen(false);
 
   return {
     isSettingsModalOpen,
@@ -31,5 +35,8 @@ export const useModals = () => {
     isDonationsModalOpen,
     openDonationsModal,
     closeDonationsModal,
+    isWinningModalOpen,
+    openWinningModal,
+    closeWinningModal,
   };
 };
