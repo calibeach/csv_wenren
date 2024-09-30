@@ -46,6 +46,7 @@ const GameControls: React.FC<GameControlsProps> = ({
 
   const handleNewGameClick = () => {
     dispatch({ type: "CLEAR_WINNING_CHENGYU", payload: [] });
+    dispatch({ type: "CLEAR_SCORE" });
     fetchData();
   };
 

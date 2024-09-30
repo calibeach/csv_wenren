@@ -34,7 +34,8 @@ type Action =
   | { type: "SET_IS_GUESS_CORRECT"; payload: boolean }
   | { type: "SET_SCORE"; payload: number }
   | { type: "SET_POINTS_FOR_CORRECT_GUESS"; payload: number }
-  | { type: "CLEAR_WINNING_CHENGYU"; payload: [] };
+  | { type: "CLEAR_WINNING_CHENGYU"; payload: [] }
+  | { type: "CLEAR_SCORE" };
 
 // Define the initial state
 const initialState: State = {
@@ -86,6 +87,8 @@ export const reducer = (state: State, action: Action): State => {
     case "CLEAR_WINNING_CHENGYU":
       console.log("Clearing winningChengyu:", action.payload);
       return { ...state, winningChengyu: action.payload };
+    case "CLEAR_SCORE":
+      return { ...state, score: 0 };
     default:
       return state;
   }
