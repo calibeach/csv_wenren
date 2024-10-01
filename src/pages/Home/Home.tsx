@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useCallback } from "react";
 
 import {
   StyledHomeContainer,
@@ -17,7 +17,8 @@ import { CharacterArea } from "../../components/CharacterArea/CharacterArea";
 import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
 import { AchievementLevels } from "../../components/AchievementLevels/AchievementLevels";
 
-const Home: React.FC = () => {
+const Home: React.FC = React.memo(() => {
+  console.log("Home component rendered");
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     data,
@@ -39,9 +40,9 @@ const Home: React.FC = () => {
     fetchData(); // Fetch data when the component mounts
   }, [fetchData]);
 
-  const handleEmperorAnimationEnd = () => {
+  const handleEmperorAnimationEnd = useCallback(() => {
     dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: true });
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     console.log("Answers", chengyuAnswers);
@@ -50,7 +51,7 @@ const Home: React.FC = () => {
     console.log("Points", score);
   }, [score]);
 
-  const checkWinningChengyu = () => {
+  const checkWinningChengyu = useCallback(() => {
     if (selectedTiles.length < 4) {
       return;
     }
@@ -89,7 +90,7 @@ const Home: React.FC = () => {
         resetTiles();
       }, 5000);
     }
-  };
+  }, [selectedTiles, chengyuAnswers, dispatch, state.winningChengyu]);
 
   useEffect(() => {
     checkWinningChengyu();
@@ -176,7 +177,7 @@ const Home: React.FC = () => {
       )}
     </StyledHomeContainer>
   );
-};
+});
 
 export default Home;
 export { Home };

@@ -9,7 +9,6 @@ import AuthProvider from "./context/AuthContext.tsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
     <AuthProvider>
       <Router>
         <Routes>
@@ -25,5 +24,4 @@ createRoot(document.getElementById("root")!).render(
         </Routes>
       </Router>
     </AuthProvider>
-  </StrictMode>
 );
