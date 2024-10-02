@@ -1,23 +1,37 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { StyledSelectContainer } from "./StyledSelect";
+import { StyledSelectContainer, StyledSelectButton } from "./StyledSelect";
 
 const Select: React.FC = React.memo(() => {
+  const [isSelected, setIsSelected] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = useCallback(
     (scriptType: string) => {
+      setIsSelected(true);
       localStorage.setItem("script", scriptType);
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     },
     [navigate]
   );
 
   return (
     <StyledSelectContainer>
-      <button onClick={() => handleClick("simplified")}>Simplified</button>
-      <button onClick={() => handleClick("traditional")}>Traditional</button>
+      <StyledSelectButton
+        isSelected={isSelected}
+        onClick={() => handleClick("simplified")}
+      >
+        简
+      </StyledSelectButton>
+      <StyledSelectButton
+        isSelected={isSelected}
+        onClick={() => handleClick("traditional")}
+      >
+        繁
+      </StyledSelectButton>
     </StyledSelectContainer>
   );
 });

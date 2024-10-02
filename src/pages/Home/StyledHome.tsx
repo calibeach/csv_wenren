@@ -38,6 +38,14 @@ const StyledBackgroundImage = styled.img`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1000; /* Ensure the image is behind other content */
+  opacity: 0; /* Start with the image hidden */
+  animation: fadeIn 2s forwards; /* Apply the fade-in animation */
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1; /* End with the image fully visible */
+    }
+  }
 `;
 
 const StyledImperialSeal = styled.img`
