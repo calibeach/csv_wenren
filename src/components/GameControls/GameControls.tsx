@@ -47,6 +47,7 @@ const GameControls: React.FC<GameControlsProps> = ({
   const handleNewGameClick = () => {
     dispatch({ type: "CLEAR_WINNING_CHENGYU", payload: [] });
     dispatch({ type: "CLEAR_SCORE" });
+    dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: false });
     fetchData();
   };
 

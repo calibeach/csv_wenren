@@ -2,14 +2,7 @@ import { useCallback } from "react";
 import { Action } from "../reducer/reducer";
 
 import tiles from "../assets/tiles/tiles.json";
-// import { findValidCombination } from "../wordSelection/wordSelection";
-
-// interface FetchDataResult {
-//   resultWords: string[];
-//   allowedCharacters: string[];
-//   selectedCharacter: string;
-// }
-
+import { convertSimplifiedToTraditional } from "./useConvertScript";
 const useFetchData = (
   dispatch: React.Dispatch<Action>
 ): (() => Promise<void>) => {
@@ -27,39 +20,98 @@ const useFetchData = (
         localStorage.setItem("index", index);
       }
 
-      // Convert index to a number
+      const script = localStorage.getItem("script");
+
       const currentIndex = parseInt(index);
 
       // Get the JSON object at the current index
       const currentTile = tiles[currentIndex % tiles.length]; // Use modulo to avoid out-of-bounds
 
-      console.log("Current tile:", currentTile);
+      let splitAnswers = currentTile.answers.split(" ");
+      let splitMasterTiles = currentTile.xuetu.split(" ");
+      let emperorCharacter = currentTile.wenren;
 
-      // Set the appropriate state values
-      dispatch({
-        type: "SET_CHENGYU_ANSWERS",
-        payload: currentTile.answers.split(" "),
-      });
-      dispatch({
-        type: "SET_MASTER_TILES",
-        payload: currentTile.xuetu.split(" "),
-      });
-      dispatch({
-        type: "SET_GAME_TILES",
-        payload: currentTile.xuetu.split(" "),
-      });
-      dispatch({
-        type: "SET_MASTER_EMPEROR_CHARACTER",
-        payload: currentTile.wenren,
-      });
-      dispatch({
-        type: "SET_EMPEROR_CHARACTER",
-        payload: currentTile.wenren,
-      });
-      dispatch({
-        type: "SET_DATA",
-        payload: currentTile,
-      });
+      if (script === "traditional") {
+        const convertAnswers = Promise.all(
+          splitAnswers.map((answer) => convertSimplifiedToTraditional(answer))
+        );
+        const convertTiles = Promise.all(
+          splitMasterTiles.map((tile) => convertSimplifiedToTraditional(tile))
+        );
+        const convertEmperor = convertSimplifiedToTraditional(emperorCharacter);
+
+        Promise.all([convertAnswers, convertTiles, convertEmperor])
+          .then(([convertedAnswers, convertedTiles, convertedEmperor]) => {
+            splitAnswers = convertedAnswers;
+            splitMasterTiles = convertedTiles;
+            emperorCharacter = convertedEmperor;
+
+            const pointsForCorrectGuess = 100 / splitAnswers.length;
+            dispatch({
+              type: "SET_CHENGYU_ANSWERS",
+              payload: splitAnswers,
+            });
+            dispatch({
+              type: "SET_MASTER_TILES",
+              payload: splitMasterTiles,
+            });
+            dispatch({
+              type: "SET_GAME_TILES",
+              payload: splitMasterTiles,
+            });
+            dispatch({
+              type: "SET_MASTER_EMPEROR_CHARACTER",
+              payload: emperorCharacter,
+            });
+            dispatch({
+              type: "SET_EMPEROR_CHARACTER",
+              payload: emperorCharacter,
+            });
+            dispatch({
+              type: "SET_DATA",
+              payload: currentTile,
+            });
+            dispatch({
+              type: "SET_POINTS_FOR_CORRECT_GUESS",
+              payload: pointsForCorrectGuess,
+            });
+          })
+          .catch((error) => {
+            console.error("Error converting text:", error);
+          });
+      } else {
+        // If no conversion is needed, dispatch the simplified characters directly
+        const pointsForCorrectGuess = 100 / splitAnswers.length;
+
+        dispatch({
+          type: "SET_CHENGYU_ANSWERS",
+          payload: splitAnswers,
+        });
+        dispatch({
+          type: "SET_MASTER_TILES",
+          payload: splitMasterTiles,
+        });
+        dispatch({
+          type: "SET_GAME_TILES",
+          payload: splitMasterTiles,
+        });
+        dispatch({
+          type: "SET_MASTER_EMPEROR_CHARACTER",
+          payload: emperorCharacter,
+        });
+        dispatch({
+          type: "SET_EMPEROR_CHARACTER",
+          payload: emperorCharacter,
+        });
+        dispatch({
+          type: "SET_DATA",
+          payload: currentTile,
+        });
+        dispatch({
+          type: "SET_POINTS_FOR_CORRECT_GUESS",
+          payload: pointsForCorrectGuess,
+        });
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }

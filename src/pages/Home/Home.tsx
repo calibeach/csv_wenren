@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   StyledHomeContainer,
@@ -18,8 +19,8 @@ import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
 import { AchievementLevels } from "../../components/AchievementLevels/AchievementLevels";
 
 const Home: React.FC = React.memo(() => {
-  console.log("Home component rendered");
   const [state, dispatch] = useReducer(reducer, initialState);
+  const navigate = useNavigate();
   const {
     data,
     winningChengyu,
@@ -37,8 +38,14 @@ const Home: React.FC = React.memo(() => {
   const fetchData = useFetchData(dispatch);
 
   useEffect(() => {
-    fetchData(); // Fetch data when the component mounts
-  }, [fetchData]);
+    // Check if the 'script' key is in localStorage
+    const script = localStorage.getItem("script");
+    if (!script) {
+      navigate("/select"); // Redirect to the "Select" page if 'script' is not found
+    } else {
+      fetchData(); // Fetch data if the script exists
+    }
+  }, [fetchData, navigate]);
 
   const handleEmperorAnimationEnd = useCallback(() => {
     dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: true });
@@ -96,7 +103,12 @@ const Home: React.FC = React.memo(() => {
     checkWinningChengyu();
   }, [selectedTiles]);
 
+  useEffect(() => {
+    console.log("Emperor Animation Complete ", isEmperorAnimationComplete);
+  }, [selectedTiles]);
+
   const resetTiles = () => {
+    console.log("Resetting tiles");
     dispatch({ type: "SET_GAME_TILES", payload: state.masterTiles });
     dispatch({
       type: "SET_EMPEROR_CHARACTER",
@@ -104,6 +116,7 @@ const Home: React.FC = React.memo(() => {
     });
     dispatch({ type: "SET_SELECTED_TILES", payload: [] });
     dispatch({ type: "SET_IS_GUESS_CORRECT", payload: false });
+    dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: false });
   };
 
   const onEmperorClick = (chengyu: string) => {

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+
 import {
   StyledAchievementLevels,
   StyledAchievementSeal,
 } from "./StyledAchievementLevels";
 import { AchievementLevelTile } from "../Tiles/AchievementLevelTiles/AchievementLevelTile";
+import { convertSimplifiedToTraditional } from "../../customHooks/useConvertScript";
 
 const achievementLevels = [
   {
@@ -66,8 +68,31 @@ interface AchievementLevelsProps {
 const AchievementLevels: React.FC<AchievementLevelsProps> = ({ score }) => {
   const level = getAchievementLevel(score);
   const { image, characters } = achievementLevels[level - 1];
-  const splitCharacters = characters.split("");
+  const [splitCharacters, setSplitCharacters] = useState<string[]>(
+    characters.split("")
+  );
   const [fadeIn, setFadeIn] = useState(false);
+
+  const script = localStorage.getItem("script");
+
+  useEffect(() => {
+    // Perform conversion if the script is set to traditional
+    if (script === "traditional") {
+      const convertSplitCharacters = Promise.all(
+        characters
+          .split("")
+          .map((character) => convertSimplifiedToTraditional(character))
+      );
+
+      // After the conversion completes, update the splitCharacters state
+      convertSplitCharacters.then((convertedCharacters) => {
+        setSplitCharacters(convertedCharacters);
+      });
+    } else {
+      // If script is not traditional, use the simplified characters
+      setSplitCharacters(characters.split(""));
+    }
+  }, [characters, script]);
 
   useEffect(() => {
     setFadeIn(true);

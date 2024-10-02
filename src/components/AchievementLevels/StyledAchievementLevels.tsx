@@ -11,7 +11,7 @@ const fadeIn = keyframes`
 
 const StyledAchievementLevels = styled.div`
   display: flex;
-  margin-top: 20px;
+  margin-top: 60px;
   justify-content: center;
   align-items: center;
   flex-direction: row;

@@ -31,15 +31,10 @@ const StyledEunuchTiles = styled.div<StyledEunuchTilesProps>`
   grid-template-rows: repeat(2, auto);
   justify-items: center;
   align-items: center;
-  opacity: 0;
-  transition: opacity 2s ease-in-out;
-  transition-delay: 0.25s;
-  margin-bottom: 3rem;
-  ${({ $isEmperorAnimationComplete }) =>
-    $isEmperorAnimationComplete &&
-    css`
-      opacity: 1;
-    `}
+  opacity: ${({ $isEmperorAnimationComplete }) =>
+    $isEmperorAnimationComplete ? 1 : 0};
+  transition: ${({ $isEmperorAnimationComplete }) =>
+    $isEmperorAnimationComplete ? "opacity 2s ease-in-out 0.25s" : "none"};
 `;
 
 export { StyledCharacterArea, StyledEmperorTile, StyledEunuchTiles };
