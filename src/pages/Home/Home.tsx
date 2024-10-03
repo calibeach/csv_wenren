@@ -140,6 +140,18 @@ const Home: React.FC = React.memo(() => {
     });
   };
 
+    const mixTiles = () => {
+      const mixedTiles = gameTiles.sort(() => Math.random() - 0.5);
+      dispatch({ type: "SET_GAME_TILES", payload: mixedTiles });
+      dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: false });
+      setTimeout(() => {
+        dispatch({
+          type: "SET_IS_EMPEROR_ANIMATION_COMPLETE",
+          payload: true,
+        });
+      }, 100);
+    };
+
   return (
     <StyledHomeContainer>
       <StyledBackgroundImage
@@ -181,7 +193,7 @@ const Home: React.FC = React.memo(() => {
             </StyledScoringArea>
             <GameControls
               fetchData={fetchData}
-              resetTiles={resetTiles}
+              mixTiles={mixTiles}
               dispatch={dispatch}
               score={score}
             />

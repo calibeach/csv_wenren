@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledGridContainer = styled.div`
-  top: 20%;
+  margin-top: 10%;
   display: grid;
   width: 35%;
   grid-template-columns: repeat(1, 150px);

@@ -15,14 +15,14 @@ import { Action } from "../../reducer/reducer";
 
 interface GameControlsProps {
   fetchData: () => void;
-  resetTiles: () => void;
+  mixTiles: () => void;
   dispatch: React.Dispatch<Action>;
   score: number;
 }
 
 const GameControls: React.FC<GameControlsProps> = ({
   fetchData,
-  resetTiles,
+  mixTiles,
   dispatch,
   score,
 }) => {
@@ -52,7 +52,7 @@ const GameControls: React.FC<GameControlsProps> = ({
   };
 
   const handleResetTilesClick = () => {
-    resetTiles();
+    mixTiles();
   };
 
   const actions = [

@@ -4,7 +4,6 @@ import ReusableModal from "../ReusableModal/ReusableModal";
 import { Button } from "../Button/Button";
 import { StyledWinningAward } from "./StyledModals";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
-import { generateHanziCSV } from "../../customHooks/useCreateCSV";
 import { StyledAchievementSeal } from "../AchievementLevels/StyledAchievementLevels";
 import { AchievementLevelTile } from "../Tiles/AchievementLevelTiles/AchievementLevelTile";
 
@@ -43,9 +42,6 @@ const Modals: React.FC<ModalsProps> = ({
     }
   }, [score, openWinningModal]);
 
-  const handleGenerateCSV = () => {
-    generateHanziCSV(); // Call the CSV generation function
-  };
   const handleOpenDonationPage = () => {
     window.open(
       "https://www.paypal.com/donate/?hosted_button_id=UQRGCK75RX2QA",
@@ -63,7 +59,6 @@ const Modals: React.FC<ModalsProps> = ({
         title="Settings"
       >
         <h1>Settings</h1>
-        <button onClick={handleGenerateCSV}>Generate Hanzi CSV</button>
       </ReusableModal>
       <ReusableModal
         isOpen={isShareModalOpen}

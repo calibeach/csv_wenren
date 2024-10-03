@@ -15,14 +15,12 @@ const ChosenTilesArea: React.FC<ChosenTilesArea> = ({
   useEffect(() => {
     if (className === "fade-out") {
       setFadeOut(true);
-      console.log("Setting fadeOut to true");
       const gridElement = document.querySelector(".fade-out");
       if (gridElement) {
         const htmlElement = gridElement as HTMLElement;
         void htmlElement.offsetWidth; // Force a reflow
       }
       const timer = setTimeout(() => {
-        console.log("Fade-out animation should have completed");
       }, 2100); // Slightly longer than the animation duration
 
       return () => clearTimeout(timer);
