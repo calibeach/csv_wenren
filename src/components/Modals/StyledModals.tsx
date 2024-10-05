@@ -6,6 +6,7 @@ const StyledModalContainer = styled.div`
   height: 50%;
   width: 50%;
   background-color: #dfdfd7;
+  font-family: "AR PL KaitiM GB" !important;
 `;
 
 const StyledWinningAward = styled.div`

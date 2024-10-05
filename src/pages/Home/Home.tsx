@@ -103,10 +103,6 @@ const Home: React.FC = React.memo(() => {
     checkWinningChengyu();
   }, [selectedTiles]);
 
-  useEffect(() => {
-    console.log("Emperor Animation Complete ", isEmperorAnimationComplete);
-  }, [selectedTiles]);
-
   const resetTiles = () => {
     console.log("Resetting tiles");
     dispatch({ type: "SET_GAME_TILES", payload: state.masterTiles });

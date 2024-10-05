@@ -85,7 +85,6 @@ export const reducer = (state: State, action: Action): State => {
     case "SET_POINTS_FOR_CORRECT_GUESS":
       return { ...state, pointsForCorrectGuess: action.payload };
     case "CLEAR_WINNING_CHENGYU":
-      console.log("Clearing winningChengyu:", action.payload);
       return { ...state, winningChengyu: action.payload };
     case "CLEAR_SCORE":
       return { ...state, score: 0 };

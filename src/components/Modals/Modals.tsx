@@ -95,23 +95,29 @@ const Modals: React.FC<ModalsProps> = ({
       <ReusableModal
         isOpen={isDonationsModalOpen}
         onRequestClose={closeDonationsModal}
-        title="Donations"
+        title="捐款"
       >
         <p>
-          Creating 文人 has been a labor of love, and now, I'd love to have you
-          involved. <br />
-          <br />
-          If you’ve enjoyed using it, consider making a small donation to help
-          us keep the servers running and bring new features your way.
+          Creating 文人 has been a labor of love, and now I'd love for you to be
+          part of it.
           <br />
           <br />
-          Even better, 10% of all donations will go to Alzheimer’s Disease
-          International, supporting critical research and care for those
-          affected by dementia.
+          If you've enjoyed using it, please consider a small donation to keep
+          the servers running and bring new features.
           <br />
           <br />
-          Thanks so much for being part of this community—your support really
-          helps us grow and do more!
+          I also created 文人 because Alzheimer’s runs in both Leila's and my
+          families, and word games are proven to help with memory. That’s why
+          10% of all donations go to Alzheimer’s Disease International to
+          support research and care.
+          <br />
+          <br />
+          Thanks for being part of this community—your support means the world
+          to us!
+          <br />
+          <br />
+          Contact us at: wenrenyouxi@gmail.com with any suggestions or ideas to
+          improve 文人.
           <br />
           <br />
         </p>
