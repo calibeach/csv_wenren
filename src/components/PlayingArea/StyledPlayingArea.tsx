@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledGridContainer = styled.div`
   margin-top: 10%;
   display: grid;
-  width: 35%;
+  width: 33.33%;
   grid-template-columns: repeat(1, 150px);
   grid-template-rows: repeat(4, 150px);
   justify-content: center;

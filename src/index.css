@@ -8,3 +8,11 @@
       height: 90vh;
       margin: 0 auto;
 }
+
+@font-face {
+  font-family: 'localFont KaitiM GB';
+  src: url('/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.woff2') format('woff2'),
+    url('/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

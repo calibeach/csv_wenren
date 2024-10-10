@@ -30,11 +30,11 @@ const StyledEmperorTile = styled.div`
 `;
 
 const StyledBackgroundImage = styled.img`
-  width: 35%;
+  width: 33.33%;
   height: 100%;
   object-fit: cover;
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1000; /* Ensure the image is behind other content */
