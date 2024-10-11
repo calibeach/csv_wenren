@@ -19,6 +19,9 @@ const StyledHomeContainer = styled.div`
   max-width: 1280px;
   color: #1c1c1c;
   position: relative;
+  @media (max-width: 430px) {
+    height: 100%;
+  }
 `;
 
 const StyledEmperorTile = styled.div`
@@ -36,6 +39,13 @@ const StyledBackgroundImage = styled.img`
   z-index: -1000; /* Ensure the image is behind other content */
   opacity: 0; /* Start with the image hidden */
   animation: fadeIn 2s forwards; /* Apply the fade-in animation */
+
+  @media (max-width: 430px) {
+    width: 100%;
+    height: 40%;
+    top: 30%;
+    object-fit: cover;
+  }
 
   @keyframes fadeIn {
     to {
@@ -89,9 +99,14 @@ const StyledPlayingArea = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: 100vh;
+  height: 100%;
   max-width: 1280px;
   z-index: 1000;
+  @media (max-width: 430px) {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const StyledCharacterArea = styled.div`
@@ -128,6 +143,10 @@ const StyledScoringAreaContainer = styled.div`
   flex-direction: column;
   height: 100%;
   width: 35%;
+  @media (max-width: 430px) {
+    height: 35%;
+    width: 100%;
+  }
 `;
 
 export {
