@@ -5,20 +5,19 @@ const StyledCharacterArea = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  margin-top: 2rem;
   font-size: 1.5rem;
   height: 100%;
   width: 30%;
   font-weight: bold;
   margin-left: 1rem;
+  margin-bottom: 4em;
 `;
 
 const StyledEmperorTile = styled.div`
   display: flex;
-  margin-top: 60px;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  margin-top: 4em;
 `;
 
 interface StyledEunuchTilesProps {

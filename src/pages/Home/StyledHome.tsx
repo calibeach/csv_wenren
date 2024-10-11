@@ -14,19 +14,15 @@ const StyledHomeContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   max-width: 1280px;
-  font-family: "KaiTi", serif;
   color: #1c1c1c;
   position: relative;
 `;
 
 const StyledEmperorTile = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+  margin-top: 8em;
 `;
 
 const StyledBackgroundImage = styled.img`

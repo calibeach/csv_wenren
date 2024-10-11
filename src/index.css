@@ -1,12 +1,16 @@
 :root {
-    font-family: 'Raleway', sans-serif;
-      display: flex;
-      flex-direction: column;
       max-width: 1280px;
-      align-items: center;
-      justify-content: center;
-      height: 90vh;
-      margin: 0 auto;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: 'Raleway', sans-serif;
 }
 
 @font-face {
