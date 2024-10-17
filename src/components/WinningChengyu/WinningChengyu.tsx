@@ -1,4 +1,3 @@
-import React from "react";
 import { StyledWinningChengyu } from "./StyledWinningChengyu";
 import { WinningCharacterTile } from "../Tiles/WinningTile/WinningTile";
 

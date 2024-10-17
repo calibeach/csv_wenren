@@ -15,8 +15,33 @@ body {
 
 @font-face {
   font-family: 'localFont KaitiM GB';
-  src: url('/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.woff2') format('woff2'),
-    url('/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.woff') format('woff');
+      src: url("/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.eot");
+  src: url("/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.eot?#iefix")format("embedded-opentype"),
+  url('/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.woff2') format('woff2'),
+    url('/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.woff') format('woff'),
+            url("/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.ttf")format("truetype"),
+            url("/src/assets/fonts/157c7e79f7f057bbeacf5f113b964875.svg#AR PL KaitiM GB")format("svg");
   font-weight: normal;
   font-style: normal;
+
+  /*
+    src: url("157c7e79f7f057bbeacf5f113b964875.eot");
+      src: url("157c7e79f7f057bbeacf5f113b964875.eot?#iefix")format("embedded-opentype"),
+        url("157c7e79f7f057bbeacf5f113b964875.woff")format("woff"),
+        url("157c7e79f7f057bbeacf5f113b964875.woff2")format("woff2"),
+        url("157c7e79f7f057bbeacf5f113b964875.ttf")format("truetype"),
+        url("157c7e79f7f057bbeacf5f113b964875.svg#AR PL KaitiM GB")format("svg");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+  */
+}
+.css-1edfpdg-MuiTypography-root {
+  font-family: 'localFont KaitiM GB' !important;
+  font-size: 40px !important;
+  justify-content: center;
+}
+
+.MuiListItemText-root {
+  font-family: 'localFont KaitiM GB', sans-serif !important;
 }

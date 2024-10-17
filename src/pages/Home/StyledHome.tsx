@@ -42,8 +42,8 @@ const StyledBackgroundImage = styled.img`
 
   @media (max-width: 430px) {
     width: 100%;
-    height: 40%;
-    top: 30%;
+    height: 60%;
+    top: 40%;
     object-fit: cover;
   }
 
@@ -126,6 +126,9 @@ const StyledWinningChengyuBoard = styled.div`
   width: 35vw;
   padding: 20px; /* Add padding if needed */
   background-color: transparent; /* Customize as needed */
+  @media (max-width: 430px) {
+    display: none;
+  }
 `;
 
 const StyledScoringArea = styled.div`
@@ -134,6 +137,26 @@ const StyledScoringArea = styled.div`
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
+
+  @media (max-width: 430px) {
+    padding-right: 1.5em;
+    margin-top: 0;
+  }
+`;
+
+const StyledWinningChengyuDropDownBoard = styled.div`
+  display: none;
+
+  @media (max-width: 430px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 5%;
+    width: 100%;
+    background-color: transparent;
+    margin-left: 1.5em;
+  }
 `;
 
 const StyledScoringAreaContainer = styled.div`
@@ -161,4 +184,5 @@ export {
   StyledImperialSeal,
   StyledScoringArea,
   StyledScoringAreaContainer,
+  StyledWinningChengyuDropDownBoard,
 };

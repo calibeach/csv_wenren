@@ -11,6 +11,10 @@ const StyledCharacterArea = styled.div`
   font-weight: bold;
   margin-left: 1rem;
   margin-bottom: 4em;
+
+  @media (max-width: 430px) {
+    margin-bottom: 0em;
+  }
 `;
 
 const StyledEmperorTile = styled.div`

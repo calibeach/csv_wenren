@@ -12,6 +12,11 @@ const StyledGridContainer = styled.div`
   box-sizing: border-box;
   min-width: 300px;
   margin-left: 80px;
+
+  @media (max-width: 430px) {
+    margin-left: 1em;
+    margin-top: 5.5em;
+  }
 `;
 
 export { StyledGridContainer };

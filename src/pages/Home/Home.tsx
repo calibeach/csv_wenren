@@ -9,6 +9,7 @@ import {
   StyledImperialSeal,
   StyledScoringArea,
   StyledScoringAreaContainer,
+  StyledWinningChengyuDropDownBoard,
 } from "./StyledHome";
 import useFetchData from "../../customHooks/useFetchData";
 import { reducer, initialState } from "../../reducer/reducer";
@@ -17,6 +18,7 @@ import { GameControls } from "../../components/GameControls/GameControls";
 import { CharacterArea } from "../../components/CharacterArea/CharacterArea";
 import { WinningChengyu } from "../../components/WinningChengyu/WinningChengyu";
 import { AchievementLevels } from "../../components/AchievementLevels/AchievementLevels";
+import { WinningChengyuDropdown } from "../../components/WinningChengyuDropdown/WinningChengyuDropdown";
 
 const Home: React.FC = React.memo(() => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -136,17 +138,17 @@ const Home: React.FC = React.memo(() => {
     });
   };
 
-    const mixTiles = () => {
-      const mixedTiles = gameTiles.sort(() => Math.random() - 0.5);
-      dispatch({ type: "SET_GAME_TILES", payload: mixedTiles });
-      dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: false });
-      setTimeout(() => {
-        dispatch({
-          type: "SET_IS_EMPEROR_ANIMATION_COMPLETE",
-          payload: true,
-        });
-      }, 100);
-    };
+  const mixTiles = () => {
+    const mixedTiles = gameTiles.sort(() => Math.random() - 0.5);
+    dispatch({ type: "SET_GAME_TILES", payload: mixedTiles });
+    dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: false });
+    setTimeout(() => {
+      dispatch({
+        type: "SET_IS_EMPEROR_ANIMATION_COMPLETE",
+        payload: true,
+      });
+    }, 100);
+  };
 
   return (
     <StyledHomeContainer>
@@ -178,13 +180,18 @@ const Home: React.FC = React.memo(() => {
             <StyledScoringArea>
               <AchievementLevels score={score} />
               {winningChengyu && (
-                <StyledWinningChengyuBoard
-                  className={isAnimating ? "fade-in" : ""}
-                >
-                  {winningChengyu.map((chengyu: string, index: number) => (
-                    <WinningChengyu key={index} winningChengYu={chengyu} />
-                  ))}
-                </StyledWinningChengyuBoard>
+                <React.Fragment>
+                  <StyledWinningChengyuBoard
+                    className={isAnimating ? "fade-in" : ""}
+                  >
+                    {winningChengyu.map((chengyu: string, index: number) => (
+                      <WinningChengyu key={index} winningChengYu={chengyu} />
+                    ))}
+                  </StyledWinningChengyuBoard>
+                  <StyledWinningChengyuDropDownBoard>
+                    <WinningChengyuDropdown winningChengYu={winningChengyu} />
+                  </StyledWinningChengyuDropDownBoard>
+                </React.Fragment>
               )}
             </StyledScoringArea>
             <GameControls
