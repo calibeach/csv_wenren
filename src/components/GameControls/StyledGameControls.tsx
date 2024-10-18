@@ -18,6 +18,11 @@ const StyledGameControlsContainer = styled.div`
       opacity: 1;
     }
   }
+
+  @media (max-width: 430px) {
+    bottom: 8.5em;
+    right: 0.5em;
+  }
 `;
 
 export { StyledGameControlsContainer };
