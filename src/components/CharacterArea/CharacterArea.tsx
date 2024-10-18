@@ -15,6 +15,7 @@ interface CharacterAreaProps {
   isEmperorAnimationComplete: boolean;
   gameTiles: string[];
   onEunuchClick: (eunuchCharacter: string) => void;
+  resetSignal: boolean;
 }
 
 const CharacterArea: React.FC<CharacterAreaProps> = ({
@@ -24,6 +25,7 @@ const CharacterArea: React.FC<CharacterAreaProps> = ({
   isEmperorAnimationComplete,
   gameTiles,
   onEunuchClick,
+  resetSignal,
 }) => {
   return (
     <StyledCharacterArea>
@@ -42,6 +44,7 @@ const CharacterArea: React.FC<CharacterAreaProps> = ({
             key={index}
             eunuchCharacter={tile}
             onEunuchClick={onEunuchClick}
+            resetSignal={resetSignal}
           />
         ))}
       </StyledEunuchTiles>

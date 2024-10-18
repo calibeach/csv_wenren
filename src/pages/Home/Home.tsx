@@ -35,6 +35,7 @@ const Home: React.FC = React.memo(() => {
     isGuessCorrect,
     pointsForCorrectGuess,
     score,
+    resetSignal
   } = state;
 
   const fetchData = useFetchData(dispatch);
@@ -115,6 +116,7 @@ const Home: React.FC = React.memo(() => {
     dispatch({ type: "SET_SELECTED_TILES", payload: [] });
     dispatch({ type: "SET_IS_GUESS_CORRECT", payload: false });
     dispatch({ type: "SET_IS_EMPEROR_ANIMATION_COMPLETE", payload: false });
+    dispatch({ type: "SET_RESET_SIGNAL" });
   };
 
   const onEmperorClick = (chengyu: string) => {
@@ -129,12 +131,6 @@ const Home: React.FC = React.memo(() => {
     dispatch({
       type: "SET_SELECTED_TILES",
       payload: [...state.selectedTiles, eunuchCharacter],
-    });
-    dispatch({
-      type: "SET_GAME_TILES",
-      payload: state.gameTiles.map((char: string) =>
-        char === eunuchCharacter ? "" : char
-      ),
     });
   };
 
@@ -171,6 +167,7 @@ const Home: React.FC = React.memo(() => {
             isEmperorAnimationComplete={isEmperorAnimationComplete}
             gameTiles={gameTiles}
             onEunuchClick={onEunuchClick}
+            resetSignal={resetSignal}
           />
           <ChosenTilesArea
             chosenCharacters={selectedTiles}

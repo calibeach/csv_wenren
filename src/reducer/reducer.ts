@@ -15,6 +15,7 @@ interface State {
   isGuessCorrect: boolean;
   pointsForCorrectGuess: number;
   score: number;
+  resetSignal: boolean;
 }
 
 // Define the Action type
@@ -35,7 +36,8 @@ type Action =
   | { type: "SET_SCORE"; payload: number }
   | { type: "SET_POINTS_FOR_CORRECT_GUESS"; payload: number }
   | { type: "CLEAR_WINNING_CHENGYU"; payload: [] }
-  | { type: "CLEAR_SCORE" };
+  | { type: "CLEAR_SCORE" }
+  | { type: "SET_RESET_SIGNAL" };
 
 // Define the initial state
 const initialState: State = {
@@ -53,6 +55,7 @@ const initialState: State = {
   isGuessCorrect: false,
   score: 0,
   pointsForCorrectGuess: 0,
+  resetSignal: false,
 };
 
 // Define the reducer function
@@ -88,6 +91,8 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, winningChengyu: action.payload };
     case "CLEAR_SCORE":
       return { ...state, score: 0 };
+    case "SET_RESET_SIGNAL":
+      return { ...state, resetSignal: !state.resetSignal };
     default:
       return state;
   }
