@@ -124,7 +124,6 @@ const Home: React.FC = React.memo(() => {
       type: "SET_SELECTED_TILES",
       payload: [...state.selectedTiles, chengyu],
     });
-    dispatch({ type: "SET_EMPEROR_CHARACTER", payload: " " });
   };
 
   const onEunuchClick = (eunuchCharacter: string) => {

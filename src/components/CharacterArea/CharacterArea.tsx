@@ -34,6 +34,7 @@ const CharacterArea: React.FC<CharacterAreaProps> = ({
           emperorCharacter={emperorCharacter}
           onEmperorClick={onEmperorClick}
           onAnimationEnd={handleEmperorAnimationEnd}
+          resetSignal={resetSignal}
         />
       </StyledEmperorTile>
       <StyledEunuchTiles

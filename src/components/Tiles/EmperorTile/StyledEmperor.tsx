@@ -9,6 +9,7 @@ const StyledEmperor = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin-bottom: 10px;
 
   .text {
     font-size: 40px;
@@ -17,7 +18,16 @@ const StyledEmperor = styled.div`
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
       -1px -1px 2px rgba(0, 0, 0, 0.2);
     font-weight: bold;
-    transition: transform 0.2s ease-in-out; /* Smooth transition for the transform */
+    opacity: 0; /* Hide the character initially */
+    transition: opacity 0.5s ease-in-out, transform 0.2s ease-in-out; /* Transition opacity and smooth scaling */
+  }
+
+  .text.visible {
+    opacity: 1; /* Show the character when it becomes visible */
+  }
+
+  .text.hidden {
+    opacity: 0; /* Keep the character hidden */
   }
 
   &:hover .text {
