@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+import { NonAnimatedTile } from "../Tiles/NonanimatedTiles/NonAnimatedTile";
 import { StyledWinningChengyuDropdown } from "./StyledWinningChengyuDropdown";
 
 interface WinningChengyuProps {
@@ -54,17 +55,29 @@ const WinningChengyuDropdown: React.FC<WinningChengyuProps> = ({
         >
           <List>
             {winningChengYu.map((chengyu, index) => (
-              <ListItem key={index}>
+              <ListItem key={index} sx={{ padding: "0" }}>
                 <ListItemText
-                  primary={chengyu}
                   sx={{
-                    fontFamily: "localFont KaitiM GB",
+                    display: "flex", // Set flexbox layout
+                    flexDirection: "row", // Align tiles in a row
+                    justifyContent: "center", // Center horizontally
+                    alignItems: "center", // Center vertically
                     color: "#1c1c1c",
                     fontWeight: "bold",
                     textAlign: "center",
                     padding: "0",
+                    gap: "-100px",
                   }}
-                />
+                >
+                  {chengyu.split("").map((character, index) => (
+                    <NonAnimatedTile
+                      key={index}
+                      nonAnimatedTile={character}
+                      height={50}
+                      width={50}
+                    />
+                  ))}
+                </ListItemText>
               </ListItem>
             ))}
           </List>

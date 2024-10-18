@@ -65,6 +65,10 @@ const StyledImperialSeal = styled.img`
   transform: translate(-50%, -50%);
   z-index: 1000;
   animation: ${fadeIn} 2s forwards;
+  @media (max-width: 430px) {
+    top: 50%;
+    left: 30%;
+  }
 `;
 
 interface StyledEunuchTilesProps {
